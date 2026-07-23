@@ -1,0 +1,1334 @@
+/* ===========================================
+   TRUSTNOVA BANK
+   STYLE.CSS PART 1
+=========================================== */
+
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+    background:#F5F7FB;
+    color:#1F2937;
+    overflow-x:hidden;
+}
+
+
+:root{
+
+    --primary:#0B8F3C;
+    --secondary:#0D2B5B;
+    --gold:#D4A017;
+    --white:#FFFFFF;
+    --light:#F5F7FB;
+    --text:#1F2937;
+    --border:#E5E7EB;
+
+}
+
+
+a{
+    text-decoration:none;
+}
+
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+
+/* ================= MAIN HEADER ================= */
+
+.header{
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:18px 7%;
+
+    background:var(--white);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+/* Logo */
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+
+.logo img{
+
+    width:70px;
+    height:70px;
+    object-fit:contain;
+
+}
+
+
+.logo-text h1{
+
+    color:var(--secondary);
+
+    font-size:32px;
+
+    line-height:1;
+
+}
+
+
+.logo-text span{
+
+    color:var(--gold);
+
+    font-size:17px;
+
+    letter-spacing:4px;
+
+    font-weight:700;
+
+}
+
+
+.logo-text p{
+
+    color:var(--primary);
+
+    font-size:12px;
+
+}
+
+
+
+/* Navigation */
+
+.navbar{
+
+    display:flex;
+
+    gap:25px;
+
+}
+
+
+.navbar a{
+
+    color:#222;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.navbar a:hover,
+.navbar a.active{
+
+    color:var(--primary);
+
+}
+
+
+
+/* Login Button */
+
+.login-btn{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:13px 28px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.login-btn:hover{
+
+    background:var(--secondary);
+
+    transform:translateY(-3px);
+
+}
+
+/* ===========================================
+   HERO SECTION
+   PART 2
+=========================================== */
+
+
+.hero{
+
+    min-height:90vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:80px 8%;
+
+    background:
+
+    linear-gradient(
+        rgba(13,43,91,.75),
+        rgba(13,43,91,.75)
+    ),
+
+    url("images/hero.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}
+
+
+
+/* Hero Text */
+
+.hero-left{
+
+    width:55%;
+
+}
+
+
+.hero-left h1{
+
+    font-size:64px;
+
+    line-height:1.2;
+
+    font-weight:700;
+
+}
+
+
+.hero-left span{
+
+    color:var(--gold);
+
+}
+
+
+.hero-left p{
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    margin:30px 0;
+
+}
+
+
+
+/* Hero Buttons */
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+
+
+.primary-btn,
+.secondary-btn{
+
+    padding:16px 35px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.primary-btn{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+
+
+.secondary-btn{
+
+    border:2px solid white;
+
+    color:white;
+
+}
+
+
+
+.primary-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+}
+
+
+
+.secondary-btn:hover{
+
+    background:white;
+
+    color:var(--secondary);
+
+    transform:translateY(-5px);
+
+}
+
+
+
+/* Homepage Online Banking Card */
+
+.login-card{
+
+    width:360px;
+
+    background:var(--secondary);
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+}
+
+
+
+.login-card h2{
+
+    margin-bottom:25px;
+
+    color:white;
+
+}
+
+
+
+.login-card input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:18px;
+
+    border-radius:8px;
+
+    border:none;
+
+    outline:none;
+
+}
+
+
+
+.login-card button{
+
+    width:100%;
+
+    padding:15px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+
+
+.login-card button:hover{
+
+    background:var(--gold);
+
+}
+
+
+
+.login-links{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+}
+
+
+
+.login-links a{
+
+    color:white;
+
+    font-size:14px;
+
+}
+/* ===========================================
+   DASHBOARD PAGES
+   PART 3
+=========================================== */
+
+
+/* Dashboard Header */
+
+.dashboard-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:white;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+
+.dashboard-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.dashboard-logo img{
+
+    width:55px;
+
+}
+
+
+.dashboard-logo h2{
+
+    color:var(--secondary);
+
+}
+
+
+
+.dashboard-user{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+
+.dashboard-user a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+
+
+
+/* ================= DASHBOARD ================= */
+
+
+.dashboard{
+
+    padding:50px 8%;
+
+}
+
+
+
+.balance-card{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--primary)
+    );
+
+    color:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    max-width:500px;
+
+    margin-bottom:40px;
+
+}
+
+
+.balance-card h1{
+
+    font-size:45px;
+
+    margin:15px 0;
+
+}
+
+
+
+
+/* Quick Actions */
+
+.quick-actions h2,
+.recent h2{
+
+    color:var(--secondary);
+
+    margin-bottom:25px;
+
+}
+
+
+.action-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+
+.action-grid a{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    color:var(--secondary);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+
+.action-grid a:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+
+/* ================= TABLES ================= */
+
+
+.recent,
+.transactions-box{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    margin-top:40px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+table th{
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:15px;
+
+}
+
+
+
+table td{
+
+    padding:15px;
+
+    border-bottom:1px solid var(--border);
+
+    text-align:center;
+
+}
+
+
+.success{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+
+.pending{
+
+    color:var(--gold);
+
+    font-weight:600;
+
+}
+
+
+
+
+/* ================= TRANSFER PAGE ================= */
+
+
+.transfer-page,
+.profile-page,
+.transactions-page{
+
+    min-height:100vh;
+
+    padding:60px 8%;
+
+}
+
+
+
+.transfer-box,
+.profile-box{
+
+    max-width:600px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+
+
+.transfer-box h1,
+.profile-box h1{
+
+    color:var(--secondary);
+
+    margin-bottom:15px;
+
+}
+
+
+
+.transfer-box label{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-weight:600;
+
+}
+
+
+
+.transfer-box input,
+.transfer-box textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:8px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+}
+
+
+
+.transfer-box button,
+.profile-box button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:25px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+}
+
+
+
+.secure-message{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:#f0f8f3;
+
+    border-radius:10px;
+
+    color:var(--primary);
+
+}
+
+
+
+
+/* ================= PROFILE ================= */
+
+
+.profile-logo{
+
+    width:90px;
+
+    margin:auto;
+
+}
+
+
+
+.profile-box{
+
+    text-align:center;
+
+}
+
+
+
+.profile-info{
+
+    margin-top:30px;
+
+    text-align:left;
+
+}
+
+
+
+.profile-info div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:15px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+.back-home{
+
+    display:block;
+
+    margin-top:25px;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+
+/* ===========================================
+   LOGIN / REGISTER / FOOTER / MOBILE
+   PART 4
+=========================================== */
+
+
+/* ================= LOGIN & REGISTER ================= */
+
+.login-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    background:
+
+    linear-gradient(
+        rgba(13,43,91,.85),
+        rgba(11,143,60,.75)
+    ),
+
+    url("images/hero.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+
+.login-box{
+
+    width:420px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+}
+
+
+
+.login-logo{
+
+    width:80px;
+
+    margin:0 auto 20px;
+
+}
+
+
+
+.login-box h1{
+
+    color:var(--secondary);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.login-box p{
+
+    color:#666;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.input-group{
+
+    text-align:left;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.input-group label{
+
+    font-weight:600;
+
+}
+
+
+
+.input-group input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:8px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+}
+
+
+
+.remember{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.remember a{
+
+    color:var(--primary);
+
+}
+
+
+
+.login-box button{
+
+    width:100%;
+
+    padding:15px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    font-size:17px;
+
+}
+
+
+
+.login-box button:hover{
+
+    background:var(--secondary);
+
+}
+
+
+
+
+.register-link{
+
+    margin-top:20px;
+
+}
+
+
+
+.register-link a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ================= FOOTER ================= */
+
+
+footer{
+
+    background:var(--secondary);
+
+    color:white;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+}
+
+
+
+footer h2{
+
+    color:var(--gold);
+
+    margin-bottom:15px;
+
+}
+
+
+footer p{
+
+    margin:10px 0;
+
+}
+
+
+
+
+/* ================= HOVER EFFECTS ================= */
+
+
+.card,
+.feature,
+.action-grid a{
+
+    transition:.3s;
+
+}
+
+
+
+.card:hover,
+.feature:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+
+}
+
+
+
+button,
+.primary-btn,
+.secondary-btn,
+.login-btn{
+
+    transition:.3s;
+
+}
+
+
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+
+@media(max-width:1000px){
+
+
+.header,
+.dashboard-header{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+.navbar{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+
+.hero{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+
+.hero-left{
+
+    width:100%;
+
+}
+
+
+.login-card{
+
+    margin-top:40px;
+
+}
+
+
+
+.action-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.hero-left h1{
+
+    font-size:40px;
+
+}
+
+
+.hero-left p{
+
+    font-size:17px;
+
+}
+
+
+.action-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.login-box{
+
+    width:100%;
+
+}
+
+
+table{
+
+    font-size:13px;
+
+}
+
+
+.profile-info div{
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+}
+
+
+
+
+/* ================= FEATURES ================= */
+
+.features-grid{
+    width:90%;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:20px;
+}
+
+.feature-box{
+    background:#fff;
+    border:1px solid #e8e8e8;
+    border-radius:15px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s ease;
+}
+
+.feature-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.feature-box i{
+    font-size:45px;
+    color:#16a34a;
+    margin-bottom:18px;
+}
+
+.feature-box h4{
+    font-size:22px;
+    color:#0b2d63;
+    margin-bottom:12px;
+    font-weight:600;
+}
+
+.feature-box p{
+    font-size:15px;
+    color:#666;
+    line-height:1.6;
+}
+
+
+/* ================= SERVICES ================= */
+
+.services{
+    width:90%;
+    margin:70px auto;
+}
+
+.services h2{
+    text-align:center;
+    color:#0b2d63;
+    font-size:34px;
+    margin-bottom:40px;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+}
+
+.service-card{
+    background:#fff;
+    border:1px solid #e8e8e8;
+    border-radius:15px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s ease;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.service-card i{
+    font-size:48px;
+    color:#0b2d63;
+    margin-bottom:18px;
+}
+
+.service-card h5{
+    font-size:22px;
+    color:#0b2d63;
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+.service-card p{
+    color:#666;
+    font-size:15px;
+    line-height:1.6;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:992px){
+
+    .features-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .service-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width:576px){
+
+    .features-grid,
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+}

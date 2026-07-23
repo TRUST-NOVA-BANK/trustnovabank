@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transfer Money | TrustNova Bank</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- Header -->
+
+<header class="dashboard-header">
+
+    <div class="dashboard-logo">
+
+        <img src="images/logo.png" alt="TrustNova Bank">
+
+        <h2>TrustNova Bank</h2>
+
+    </div>
+
+
+    <div class="dashboard-user">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="index.html">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+
+
+<!-- Transfer Section -->
+
+<section class="transfer-page">
+
+
+    <div class="transfer-box">
+
+
+        <h1>
+            💸 Send Money
+        </h1>
+
+
+        <p>
+            Make a secure transfer from your TrustNova account.
+        </p>
+
+
+
+        <form id="transferForm">
+
+
+            <label>
+                Recipient Name
+            </label>
+
+            <input 
+            type="text"
+            placeholder="Enter recipient name"
+            required>
+
+
+
+            <label>
+                Account Number
+            </label>
+
+            <input 
+            type="number"
+            placeholder="Enter account number"
+            required>
+
+
+
+
+            <label>
+                Bank Name
+            </label>
+
+            <input 
+            type="text"
+            placeholder="Enter bank name"
+            required>
+
+
+
+
+            <label>
+                Amount
+            </label>
+
+            <input 
+            type="number"
+            placeholder="$0.00"
+            required>
+
+
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+            placeholder="Transfer purpose"></textarea>
+
+
+
+
+            <button type="submit">
+                Confirm Transfer
+            </button>
+
+
+        </form>
+
+
+
+        <div class="secure-message">
+
+            🔒 Your transfer is protected by TrustNova security.
+
+        </div>
+
+
+
+        <a href="dashboard.html" class="back-home">
+
+            ← Back to Dashboard
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

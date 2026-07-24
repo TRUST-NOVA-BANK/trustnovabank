@@ -3,12 +3,12 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transactions | TrustNova Bank</title>
+<title>Transactions | TrustNova Bank</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="transactions.css">
 
 </head>
 
@@ -16,155 +16,165 @@
 <body>
 
 
-<header class="dashboard-header">
-
-    <div class="dashboard-logo">
-
-        <img src="images/logo.png" alt="TrustNova Bank">
-
-        <h2>TrustNova Bank</h2>
-
-    </div>
+<header class="bank-header">
 
 
-    <div class="dashboard-user">
+<div class="bank-logo">
 
-        <a href="dashboard.html">
-            Dashboard
-        </a>
+<img src="images/logo.png" alt="TrustNova Bank">
 
-        <a href="index.html">
-            Logout
-        </a>
+<h2>
+TrustNova Bank
+</h2>
 
-    </div>
+</div>
+
+
+
+<div class="header-links">
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+
+<a href="#" onclick="logout()">
+Logout
+</a>
+
+</div>
+
 
 </header>
 
 
 
 
-<section class="transactions-page">
+
+<main class="transactions-page">
 
 
-    <div class="transactions-box">
+<section class="transactions-box">
 
 
-        <h1>
-            📜 Transaction History
-        </h1>
+<div class="page-title">
 
+<h1>
+Transaction History
+</h1>
 
-        <p>
-            View all your recent banking activities.
-        </p>
+<p>
+Review your recent banking activity
+</p>
 
-
-
-        <table>
-
-
-            <tr>
-
-                <th>Date</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Status</th>
-
-            </tr>
+</div>
 
 
 
-            <tr>
 
-                <td>19 July 2026</td>
 
-                <td>Transfer to John Smith</td>
+<div class="filters">
 
-                <td>Debit</td>
 
-                <td>$250.00</td>
-
-                <td class="success">
-                    Completed
-                </td>
-
-            </tr>
+<input
+type="text"
+id="searchTransaction"
+placeholder="Search transactions..."
+>
 
 
 
-            <tr>
+<select id="statusFilter">
 
-                <td>15 July 2026</td>
+<option value="all">
+All Status
+</option>
 
-                <td>Salary Payment</td>
+<option value="Completed">
+Completed
+</option>
 
-                <td>Credit</td>
+<option value="Pending">
+Pending
+</option>
 
-                <td>$3,500.00</td>
+<option value="Failed">
+Failed
+</option>
 
-                <td class="success">
-                    Completed
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>10 July 2026</td>
-
-                <td>Online Purchase</td>
-
-                <td>Debit</td>
-
-                <td>$85.00</td>
-
-                <td class="pending">
-                    Pending
-                </td>
-
-            </tr>
+</select>
 
 
 
-            <tr>
-
-                <td>05 July 2026</td>
-
-                <td>Account Deposit</td>
-
-                <td>Credit</td>
-
-                <td>$1,000.00</td>
-
-                <td class="success">
-                    Completed
-                </td>
-
-            </tr>
-
-
-        </table>
+</div>
 
 
 
-        <a href="dashboard.html" class="back-home">
-
-            ← Back to Dashboard
-
-        </a>
 
 
-    </div>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Description</th>
+
+<th>Type</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="transactionTable">
+
+
+<tr>
+
+<td colspan="5">
+Loading transactions...
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
 
 
 </section>
 
 
+</main>
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
 <script src="transactions.js"></script>
 
 

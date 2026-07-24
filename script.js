@@ -8,30 +8,38 @@
    LOGIN FORM VALIDATION
 ========================= */
 
-const loginForm = document.querySelector(".login-box form");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginForm = document.getElementById("loginForm");
 
-if(loginForm){
+loginForm.addEventListener("submit", async function(e) {
 
-    loginForm.addEventListener("submit", function(event){
+    e.preventDefault();
 
-        event.preventDefault();
-
-        const username = loginForm.querySelector(
-            "input[type='text']"
-        ).value;
-
-        const password = loginForm.querySelector(
-            "input[type='password']"
-        ).value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
 
-        if(username === "" || password === ""){
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
 
-            alert("Please fill in all fields.");
 
-        }else{
+    if (error) {
 
-            alert("Login successful. Welcome to TrustNova Bank!");
+        alert(error.message);
+
+    } else {
+
+        alert("Login successful!");
+
+        window.location.href = "dashboard.html";
+
+    }
+
+});
+
 
             // Later we will connect this to a real database
             // and redirect to dashboard.html

@@ -1,3 +1,5 @@
+alert("Admin auth connected");
+
 document
 .getElementById("adminLoginForm")
 .addEventListener("submit", async function(e){

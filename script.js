@@ -179,3 +179,10 @@ if(year){
 
 <script src="script.js"></script>
 
+
+localStorage.setItem("adminName", admin.full_name);
+
+window.location.href = "admin-dashboard.html";
+
+
+

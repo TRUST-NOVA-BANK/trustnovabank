@@ -186,3 +186,75 @@ window.location.href = "admin-dashboard.html";
 
 
 
+.user-photo-card{
+
+    width:320px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+
+.user-photo-card img{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid #0B8F3C;
+
+    margin-bottom:20px;
+
+}
+
+
+.user-photo-card h2{
+
+    color:#0D2B5B;
+
+    margin-bottom:10px;
+
+}
+
+
+.user-photo-card p{
+
+    color:#666;
+
+    margin:8px;
+
+}
+
+
+.user-photo-card button{
+
+    margin-top:20px;
+
+    padding:12px 25px;
+
+    background:#0B8F3C;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+

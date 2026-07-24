@@ -3,76 +3,213 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Manage Accounts - TrustNova Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+
+<title>
+TrustNova Bank | Manage Accounts
+</title>
+
+
+<link rel="stylesheet" href="admin-accounts.css">
+
 
 </head>
 
+
 <body>
 
-<section class="dashboard">
 
-    <div class="dashboard-header">
-
-        <h1>Manage Bank Accounts</h1>
-
-        <button onclick="window.location.href='admin-dashboard.html'">
-            ← Back to Dashboard
-        </button>
-
-    </div>
+<header class="admin-header">
 
 
-    <div class="recent">
+<div class="admin-logo">
 
-        <input
-            type="text"
-            id="searchAccount"
-            placeholder="Search by Account Number or User ID..."
-            onkeyup="searchAccounts()">
 
-        <br><br>
+<img src="images/logo.png">
 
-        <table>
 
-            <thead>
+<h2>
+TrustNova Bank
+</h2>
 
-                <tr>
 
-                    <th>Account ID</th>
-                    <th>User ID</th>
-                    <th>Account Number</th>
-                    <th>Account Type</th>
-                    <th>Balance</th>
-                    <th>Status</th>
-                    <th>Action</th>
+</div>
 
-                </tr>
 
-            </thead>
 
-            <tbody id="accountsTable">
+<div class="admin-links">
 
-            </tbody>
 
-        </table>
+<a href="admin-dashboard.html">
+Dashboard
+</a>
 
-    </div>
+
+<a href="#" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+<section class="accounts-page">
+
+
+
+<div class="page-title">
+
+
+<h1>
+Manage Accounts
+</h1>
+
+
+<p>
+Monitor customer banking accounts
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="search-box">
+
+
+<input
+
+type="text"
+
+id="searchAccount"
+
+placeholder="Search account number or user ID..."
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="accounts-table">
+
+
+<table>
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+Account ID
+</th>
+
+
+<th>
+Account Number
+</th>
+
+
+<th>
+User ID
+</th>
+
+
+<th>
+Type
+</th>
+
+
+<th>
+Balance
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="accountsTable">
+
+
+<tr>
+
+<td colspan="7">
+
+Loading accounts...
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
 
 </section>
 
-<!-- Supabase Library -->
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Supabase Configuration -->
 <script src="supabase.js"></script>
 
-<!-- Accounts JavaScript -->
 <script src="admin-accounts.js"></script>
+
 
 </body>
 

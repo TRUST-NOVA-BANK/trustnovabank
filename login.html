@@ -3,116 +3,103 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login - TrustNova Bank</title>
+    <title>Login - TrustNova Bank</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <section class="login-page">
 
+    <div class="login-box">
 
-<div class="login-box">
+        <img src="images/logo.png" class="login-logo" alt="TrustNova Bank Logo">
 
+        <h1>Welcome Back</h1>
 
-<img src="images/logo.png" class="login-logo">
+        <p>Login to your TrustNova Bank account</p>
 
+        <form id="loginForm">
 
-<h1>Welcome Back</h1>
+            <div class="input-group">
 
-<p>Login to your TrustNova Bank account</p>
+                <label>Email Address</label>
 
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required>
 
+            </div>
 
-<form id="loginForm">
+            <div class="input-group">
 
+                <label>Password</label>
 
-<div class="input-group">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required>
 
-<label>Email Address</label>
+            </div>
 
-<input 
-type="email"
-id="email"
-placeholder="Enter your email"
-required>
+            <div class="remember">
 
-</div>
+                <label>
 
+                    <input type="checkbox">
 
+                    Remember me
 
-<div class="input-group">
+                </label>
 
-<label>Password</label>
+                <a href="forgot-password.html">
 
-<input 
-type="password"
-id="password"
-placeholder="Enter your password"
-required>
+                    Forgot Password?
 
-</div>
+                </a>
 
+            </div>
 
+            <button type="submit">
 
-<div class="remember">
+                Login
 
-<label>
-<input type="checkbox">
-Remember me
-</label>
+            </button>
 
+        </form>
 
-<a href="#">
-Forgot Password?
-</a>
+        <div class="register-link">
 
-</div>
+            Don't have an account?
 
+            <a href="register.html">
 
+                Create Account
 
-<button type="submit">
+            </a>
 
-Login
+        </div>
 
-</button>
-
-
-
-</form>
-
-
-
-<div class="register-link">
-
-Don't have an account?
-
-<a href="register.html">
-Create Account
-</a>
-
-
-</div>
-
-
-</div>
-
+    </div>
 
 </section>
 
-
-  
-  
+<!-- Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="login.js"></script>
 
+<!-- Supabase Configuration -->
+<script src="supabase.js"></script>
+
+<!-- Login Script -->
+<script src="login.js"></script>
 
 </body>
 

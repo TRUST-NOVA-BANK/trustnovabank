@@ -3,74 +3,244 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Transaction Management - TrustNova Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+
+<title>
+TrustNova Bank | Admin Transactions
+</title>
+
+
+<link rel="stylesheet" href="admin-transactions.css">
+
 
 </head>
 
+
 <body>
 
-<section class="dashboard">
 
-    <div class="dashboard-header">
+<header class="admin-header">
 
-        <h1>Transaction Management</h1>
 
-        <button onclick="window.location.href='admin-dashboard.html'">
-            ← Back to Dashboard
-        </button>
+<div class="admin-logo">
 
-    </div>
 
-    <div class="recent">
+<img src="images/logo.png">
 
-        <input
-            type="text"
-            id="searchTransaction"
-            placeholder="Search by Transaction ID, Account ID or Type..."
-            onkeyup="searchTransactions()">
 
-        <br><br>
+<h2>
+TrustNova Bank
+</h2>
 
-        <table>
 
-            <thead>
+</div>
 
-                <tr>
 
-                    <th>Transaction ID</th>
-                    <th>Account ID</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
 
-                </tr>
 
-            </thead>
+<div class="admin-links">
 
-            <tbody id="transactionsTable">
 
-            </tbody>
+<a href="admin-dashboard.html">
+Dashboard
+</a>
 
-        </table>
 
-    </div>
+<a href="#" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+<section class="transactions-page">
+
+
+<div class="page-title">
+
+
+<h1>
+Transaction Monitoring
+</h1>
+
+
+<p>
+Review all banking activity
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="filters">
+
+
+
+<input
+
+type="text"
+
+id="searchTransaction"
+
+placeholder="Search transactions..."
+
+>
+
+
+
+<select id="statusFilter">
+
+
+<option value="all">
+All Status
+</option>
+
+
+<option value="Completed">
+Completed
+</option>
+
+
+<option value="Pending">
+Pending
+</option>
+
+
+<option value="Failed">
+Failed
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="transactions-table">
+
+
+
+<table>
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+ID
+</th>
+
+
+<th>
+Account
+</th>
+
+
+<th>
+Type
+</th>
+
+
+<th>
+Description
+</th>
+
+
+<th>
+Amount
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Date
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="transactionsTable">
+
+
+<tr>
+
+<td colspan="7">
+
+Loading transactions...
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
 
 </section>
 
-<!-- Supabase Library -->
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Supabase Configuration -->
 <script src="supabase.js"></script>
 
-<!-- Transactions JavaScript -->
 <script src="admin-transactions.js"></script>
+
 
 </body>
 

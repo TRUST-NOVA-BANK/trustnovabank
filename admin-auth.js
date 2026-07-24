@@ -1,39 +1,32 @@
-alert("Admin auth connected");
+document.addEventListener("DOMContentLoaded", () => {
 
-document
-.getElementById("adminLoginForm")
-.addEventListener("submit", async function(e) {
+    alert("Admin auth connected");
 
-    e.preventDefault();
+    const form = document.getElementById("adminLoginForm");
 
-    const email = document.getElementById("admin_email").value;
-    const password = document.getElementById("admin_password").value;
+    form.addEventListener("submit", async function (e) {
 
-    console.log("Trying login:", email);
+        e.preventDefault();
 
+        const email = document.getElementById("admin_email").value;
+        const password = document.getElementById("admin_password").value;
 
-    const { data: admin, error } = await supabase
-        .from("admins")
-        .select("*")
-        .eq("email", email)
-        .eq("password_hash", password)
-        .single();
+        const { data: admin, error } = await supabase
+            .from("admins")
+            .select("*")
+            .eq("email", email)
+            .eq("password_hash", password)
+            .single();
 
+        if (error || !admin) {
+            alert("Invalid email or password");
+            return;
+        }
 
-    console.log(admin);
-    console.log(error);
-
-
-    if (error) {
-
-        alert(error.message);
-
-    } else {
-
-        alert("Admin login successful!");
+        alert("Login successful!");
 
         window.location.href = "admin-dashboard.html";
 
-    }
+    });
 
 });

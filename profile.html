@@ -3,152 +3,186 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile | TrustNova Bank</title>
+<title>Profile | TrustNova Bank</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="profile.css">
 
 </head>
 
+
 <body>
 
-<header class="dashboard-header">
 
-    <div class="dashboard-logo">
+<header class="bank-header">
 
-        <img src="images/logo.png" alt="TrustNova Bank">
 
-        <h2>TrustNova Bank</h2>
+<div class="bank-logo">
 
-    </div>
+<img src="images/logo.png" alt="TrustNova Bank">
 
-    <div class="dashboard-user">
+<h2>
+TrustNova Bank
+</h2>
 
-        <a href="dashboard.html">
-            Dashboard
-        </a>
+</div>
 
-        <a href="#" onclick="logout()">
-            Logout
-        </a>
 
-    </div>
+
+<div class="header-links">
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+
+<a href="#" onclick="logout()">
+Logout
+</a>
+
+
+</div>
+
 
 </header>
 
+
+
+
+
+
+
 <section class="profile-page">
 
-    <div class="profile-box">
 
-        <img
-            id="profilePhoto"
-            src="images/default-user.png"
-            alt="Profile"
-            class="profile-logo">
 
-        <h1>Customer Profile</h1>
+<div class="profile-card">
 
-        <p>Manage your personal banking information.</p>
 
-        <div class="profile-info">
+<img 
+id="profile_photo"
+src="images/default-user.png"
+class="profile-image"
+>
 
-            <div>
 
-                <strong>Full Name</strong>
 
-                <span id="fullName"></span>
+<h1 id="full_name">
 
-            </div>
+Loading...
 
-            <div>
+</h1>
 
-                <strong>Email</strong>
 
-                <span id="email"></span>
+<p id="email">
 
-            </div>
+</p>
 
-            <div>
 
-                <strong>Phone</strong>
 
-                <span id="phone"></span>
 
-            </div>
+<div class="profile-details">
 
-            <div>
 
-                <strong>Nationality</strong>
 
-                <span id="nationality"></span>
+<div>
 
-            </div>
+<strong>
+Phone
+</strong>
 
-            <div>
+<span id="phone">
+Loading...
+</span>
 
-                <strong>Sex</strong>
+</div>
 
-                <span id="sex"></span>
 
-            </div>
 
-            <div>
 
-                <strong>Date of Birth</strong>
+<div>
 
-                <span id="dob"></span>
+<strong>
+Account Number
+</strong>
 
-            </div>
+<span id="account_number">
+Loading...
+</span>
 
-            <div>
+</div>
 
-                <strong>Account Number</strong>
 
-                <span id="accountNumber"></span>
 
-            </div>
 
-            <div>
 
-                <strong>Account Type</strong>
+<div>
 
-                <span id="accountType"></span>
+<strong>
+Account Type
+</strong>
 
-            </div>
+<span id="account_type">
+Loading...
+</span>
 
-            <div>
+</div>
 
-                <strong>Status</strong>
 
-                <span id="status"></span>
 
-            </div>
 
-        </div>
 
-        <button>
+<div>
 
-            Update Profile
+<strong>
+Account Status
+</strong>
 
-        </button>
+<span id="account_status">
+Loading...
+</span>
 
-        <a href="dashboard.html" class="back-home">
+</div>
 
-            ← Back to Dashboard
 
-        </a>
 
-    </div>
+
+</div>
+
+
+
+
+
+
+<a href="dashboard.html"
+class="back-btn">
+
+← Back To Dashboard
+
+</a>
+
+
+
+</div>
+
+
 
 </section>
+
+
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase.js"></script>
 
 <script src="profile.js"></script>
+
 
 </body>
 

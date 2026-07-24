@@ -1,34 +1,17 @@
-/* =========================================
+/* =====================================
    TRUSTNOVA BANK
-   CUSTOMER DASHBOARD JAVASCRIPT
-========================================= */
-
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-
-    const user = JSON.parse(
-        localStorage.getItem("user")
-    );
-
-
-    if (!user) {
-
-        window.location.href = "login.html";
-
-        return;
-
-    }
+   CUSTOMER DASHBOARD SYSTEM
+===================================== */
 
 
 
-    loadUserProfile(user.id);
+document.addEventListener(
+"DOMContentLoaded",
+async function(){
 
-    loadAccount(user.id);
 
-    loadTransactions(user.id);
+    await loadDashboard();
 
-    displayDate();
 
 
 });
@@ -37,312 +20,611 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+
+
 /* ===============================
-   DISPLAY DATE
+   LOAD DASHBOARD
 ================================ */
 
 
-function displayDate(){
-
-    const dateElement =
-    document.getElementById("current_date");
+async function loadDashboard(){
 
 
-    if(dateElement){
 
-        const today =
-        new Date();
+try{
 
 
-        dateElement.textContent =
-        today.toLocaleDateString(
-            "en-US",
-            {
-                weekday:"long",
-                year:"numeric",
-                month:"long",
-                day:"numeric"
-            }
-        );
+
+    const {
+
+        data:userData,
+
+        error:userError
+
+    } = await supabase.auth.getUser();
+
+
+
+
+    if(userError || !userData.user){
+
+
+        window.location.href =
+        "login.html";
+
+
+        return;
+
 
     }
 
-}
+
+
+
+
+    const user =
+    userData.user;
 
 
 
 
 
-/* ===============================
-   LOAD USER PROFILE
-================================ */
 
 
-async function loadUserProfile(userId){
+    /*
+        Load customer profile
+    */
 
 
-    const { data:userData, error } =
-    await supabase
+    const {
+
+        data:profile,
+
+        error:profileError
+
+    } = await supabase
+
     .from("users")
+
     .select("*")
-    .eq("user_id", userId)
-    .single();
 
-
-
-    if(error){
-
-        console.log(error.message);
-
-        return;
-
-    }
-
-
-
-    document.getElementById("user_name")
-    .textContent =
-    userData.first_name +
-    " " +
-    userData.last_name;
-
-
-
-    document.getElementById("header_name")
-    .textContent =
-    userData.first_name;
-
-
-
-    document.getElementById("user_email")
-    ?.textContent =
-    userData.email;
-
-
-
-    if(userData.profile_photo){
-
-        document.getElementById("header_photo")
-        .src =
-        userData.profile_photo;
-
-    }
-
-
-}
-
-
-
-
-
-/* ===============================
-   LOAD ACCOUNT
-================================ */
-
-
-async function loadAccount(userId){
-
-
-    const { data:account,error } =
-    await supabase
-    .from("accounts")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
-
-
-
-    if(error){
-
-        console.log(error.message);
-
-        return;
-
-    }
-
-
-
-    const formatter =
-    new Intl.NumberFormat(
-        "en-US",
-        {
-            style:"currency",
-            currency:"USD"
-        }
-    );
-
-
-
-    document.getElementById("account_balance")
-    .textContent =
-    formatter.format(
-        account.balance
-    );
-
-
-
-    document.getElementById("account_number")
-    .textContent =
-    "**** **** **** " +
-    account.account_number
-    .slice(-4);
-
-
-
-    document.getElementById("account_status")
-    .textContent =
-    account.status;
-
-
-
-}
-
-
-
-
-
-/* ===============================
-   LOAD TRANSACTIONS
-================================ */
-
-
-async function loadTransactions(userId){
-
-
-    const {data:account}
-    =
-    await supabase
-    .from("accounts")
-    .select("account_id")
-    .eq("user_id",userId)
-    .single();
-
-
-
-    if(!account){
-
-        return;
-
-    }
-
-
-
-    const {data:transactions,error}
-    =
-    await supabase
-    .from("transactions")
-    .select("*")
     .eq(
-        "account_id",
+
+        "user_id",
+
+        user.id
+
+    )
+
+    .single();
+
+
+
+
+
+
+    if(profileError){
+
+        throw profileError;
+
+    }
+
+
+
+
+
+
+
+    displayProfile(profile);
+
+
+
+
+
+
+
+
+    /*
+        Load account
+    */
+
+
+    const {
+
+        data:account,
+
+        error:accountError
+
+    } = await supabase
+
+    .from("accounts")
+
+    .select("*")
+
+    .eq(
+
+        "user_id",
+
+        user.id
+
+    )
+
+    .single();
+
+
+
+
+
+
+
+    if(accountError){
+
+        throw accountError;
+
+    }
+
+
+
+
+
+
+    displayAccount(account);
+
+
+
+
+
+
+
+
+    /*
+        Load transactions
+    */
+
+
+    await loadTransactions(
+
         account.account_id
-    )
-    .order(
-        "transaction_date",
-        {
-            ascending:false
-        }
-    )
-    .limit(5);
 
-
-
-
-    if(error){
-
-        console.log(error.message);
-
-        return;
-
-    }
-
-
-
-
-    const table =
-    document.getElementById(
-        "transactionList"
     );
 
 
 
-    table.innerHTML="";
-
-
-
-    if(transactions.length===0){
-
-
-        table.innerHTML =
-        `
-        <tr>
-        <td colspan="4">
-        No transactions available
-        </td>
-        </tr>
-        `;
-
-
-        return;
-
-    }
-
-
-
-
-    const formatter =
-    new Intl.NumberFormat(
-        "en-US",
-        {
-            style:"currency",
-            currency:"USD"
-        }
-    );
-
-
-
-
-    transactions.forEach(transaction=>{
-
-
-        table.innerHTML +=
-        `
-
-        <tr>
-
-        <td>
-        ${new Date(
-            transaction.transaction_date
-        ).toLocaleDateString("en-US")}
-        </td>
-
-
-        <td>
-        ${transaction.description ||
-        transaction.transaction_type}
-        </td>
-
-
-        <td>
-        ${formatter.format(
-            transaction.amount
-        )}
-        </td>
-
-
-        <td>
-        ${transaction.status}
-        </td>
-
-
-        </tr>
-
-        `;
-
-
-    });
 
 
 }
+
+catch(error){
+
+
+    console.error(error);
+
+
+    alert(
+        "Unable to load dashboard"
+    );
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===============================
+   DISPLAY PROFILE
+================================ */
+
+
+function displayProfile(profile){
+
+
+
+const name =
+document.getElementById(
+"user_name"
+);
+
+
+
+if(name){
+
+
+name.textContent =
+
+profile.first_name
++
+" "
++
+profile.last_name;
+
+
+}
+
+
+
+
+
+
+const email =
+document.getElementById(
+"user_email"
+);
+
+
+
+if(email){
+
+
+email.textContent =
+profile.email;
+
+
+}
+
+
+
+
+
+
+const photo =
+document.getElementById(
+"user_photo"
+);
+
+
+
+if(
+photo &&
+profile.profile_photo
+){
+
+
+photo.src =
+profile.profile_photo;
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===============================
+   DISPLAY ACCOUNT
+================================ */
+
+
+function displayAccount(account){
+
+
+
+const money =
+new Intl.NumberFormat(
+"en-US",
+{
+
+style:"currency",
+
+currency:"USD"
+
+});
+
+
+
+
+
+
+const balance =
+document.getElementById(
+"balance"
+);
+
+
+
+if(balance){
+
+
+balance.textContent =
+money.format(
+account.balance || 0
+);
+
+
+}
+
+
+
+
+
+
+
+const accountNumber =
+document.getElementById(
+"account_number"
+);
+
+
+
+if(accountNumber){
+
+
+accountNumber.textContent =
+
+"**** **** "
++
+String(
+account.account_number
+)
+.slice(-4);
+
+
+}
+
+
+
+
+
+
+
+const type =
+document.getElementById(
+"account_type"
+);
+
+
+
+if(type){
+
+
+type.textContent =
+account.account_type;
+
+
+}
+
+
+
+
+
+
+
+const status =
+document.getElementById(
+"user_status"
+);
+
+
+
+if(status){
+
+
+status.textContent =
+account.status;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===============================
+   TRANSACTIONS
+================================ */
+
+
+async function loadTransactions(
+accountId
+){
+
+
+
+const {
+
+data:transactions,
+
+error
+
+} = await supabase
+
+.from("transactions")
+
+.select("*")
+
+.eq(
+
+"account_id",
+
+accountId
+
+)
+
+.order(
+
+"transaction_date",
+
+{
+
+ascending:false
+
+}
+
+)
+
+.limit(5);
+
+
+
+
+
+
+
+if(error){
+
+
+console.error(error);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+const list =
+document.getElementById(
+"transactionList"
+);
+
+
+
+
+
+if(!list){
+
+return;
+
+}
+
+
+
+
+
+list.innerHTML="";
+
+
+
+
+
+const money =
+new Intl.NumberFormat(
+"en-US",
+{
+
+style:"currency",
+
+currency:"USD"
+
+});
+
+
+
+
+
+
+if(
+transactions.length === 0
+){
+
+
+list.innerHTML =
+
+`
+
+<tr>
+
+<td colspan="3">
+
+No transactions yet
+
+</td>
+
+</tr>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+transactions.forEach(
+(transaction)=>{
+
+
+
+list.innerHTML +=
+
+`
+
+<tr>
+
+<td>
+
+${transaction.description || "Transfer"}
+
+</td>
+
+
+<td>
+
+${money.format(
+transaction.amount
+)}
+
+</td>
+
+
+<td>
+
+${transaction.status}
+
+</td>
+
+
+</tr>
+
+`;
+
+
+});
+
+
+
+}
+
+
 
 
 
@@ -358,14 +640,19 @@ async function loadTransactions(userId){
 async function logout(){
 
 
-    await supabase.auth.signOut();
+
+await supabase.auth.signOut();
 
 
-    localStorage.removeItem("user");
+
+localStorage.removeItem(
+"user"
+);
 
 
-    window.location.href =
-    "login.html";
+
+window.location.href =
+"login.html";
 
 
 }

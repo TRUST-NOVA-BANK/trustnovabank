@@ -40,6 +40,17 @@ async function loadAdminDashboard() {
 
 }
 
+
+
+const adminName = localStorage.getItem("adminName");
+
+if (adminName) {
+    document.querySelector(".dashboard-header p").textContent =
+        "Welcome, " + adminName;
+}
+
+
+
 function viewUsers() {
 
     window.location.href = "admin-users.html";

@@ -1,14 +1,57 @@
+<link rel="stylesheet" href="style.css">
+
+
+<section class="login-page">
+
+<div class="login-box">
+
+<img src="images/logo.png" class="login-logo">
+
+<h1>Admin Login</h1>
+
+<p>Login to TrustNova Bank Admin Panel</p>
+
+
 <form id="adminLoginForm">
 
-<input id="admin_email" type="email" placeholder="Admin Email">
+<div class="input-group">
 
-<input id="admin_password" type="password" placeholder="Password">
+<label>Email Address</label>
+
+<input 
+id="admin_email"
+type="email"
+placeholder="Admin Email"
+required>
+
+</div>
+
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input 
+id="admin_password"
+type="password"
+placeholder="Password"
+required>
+
+</div>
+
 
 <button type="submit">
 Admin Login
 </button>
 
+
 </form>
+
+
+</div>
+
+</section>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>

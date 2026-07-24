@@ -11,36 +11,37 @@ async function loadAccounts() {
     }
 
     const table = document.getElementById("accountsTable");
-
     table.innerHTML = "";
 
     accounts.forEach(account => {
+
+        const balance = Number(account.balance || 0).toLocaleString();
 
         table.innerHTML += `
 
         <tr>
 
-        <td>${account.account_id}</td>
+            <td>${account.account_id}</td>
 
-        <td>${account.user_id}</td>
+            <td>${account.user_id}</td>
 
-        <td>${account.account_number}</td>
+            <td>${account.account_number}</td>
 
-        <td>${account.account_type}</td>
+            <td>${account.account_type}</td>
 
-        <td>₦${Number(account.balance).toLocaleString()}</td>
+            <td>₦${balance}</td>
 
-        <td>${account.status}</td>
+            <td>${account.status}</td>
 
-        <td>
+            <td>
 
-        <button onclick="toggleAccountStatus(${account.account_id}, '${account.status}')">
+                <button onclick="toggleAccountStatus(${account.account_id}, '${account.status}')">
 
-        ${account.status === "Active" ? "Deactivate" : "Activate"}
+                    ${account.status === "Active" ? "Deactivate" : "Activate"}
 
-        </button>
+                </button>
 
-        </td>
+            </td>
 
         </tr>
 
@@ -49,6 +50,8 @@ async function loadAccounts() {
     });
 
 }
+
+
 
 async function toggleAccountStatus(accountId, status) {
 
@@ -73,24 +76,28 @@ async function toggleAccountStatus(accountId, status) {
 
 }
 
+
+
 function searchAccounts() {
 
-    const input = document.getElementById("searchAccount").value.toLowerCase();
+    const input = document
+        .getElementById("searchAccount")
+        .value
+        .toLowerCase();
 
     const rows = document.querySelectorAll("#accountsTable tr");
 
     rows.forEach(row => {
 
-        row.style.display =
-            row.innerText.toLowerCase().includes(input)
-                ? ""
-                : "none";
+        row.style.display = row.innerText
+            .toLowerCase()
+            .includes(input)
+            ? ""
+            : "none";
 
     });
 
 }
-
-loadAccounts();
 
 
 
@@ -99,8 +106,10 @@ async function logoutAdmin() {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
+
         alert(error.message);
         return;
+
     }
 
     window.location.href = "admin-login.html";
@@ -109,4 +118,6 @@ async function logoutAdmin() {
 
 
 
-
+document.addEventListener("DOMContentLoaded", () => {
+    loadAccounts();
+});

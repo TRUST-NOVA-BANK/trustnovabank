@@ -1,138 +1,150 @@
-/* ===========================================
+/* ==========================================
    TRUSTNOVA BANK
-   STYLE.CSS PART 1
-=========================================== */
+   STYLE.CSS
+   PART 1
+========================================== */
 
-
-/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-
-/* ================= RESET ================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-
-html{
-    scroll-behavior:smooth;
-}
-
-
-body{
-    background:#F5F7FB;
-    color:#1F2937;
-    overflow-x:hidden;
-}
-
+/* ================= ROOT ================= */
 
 :root{
 
     --primary:#0B8F3C;
     --secondary:#0D2B5B;
-    --gold:#D4A017;
-    --white:#FFFFFF;
-    --light:#F5F7FB;
-    --text:#1F2937;
-    --border:#E5E7EB;
+    --gold:#D4AF37;
+    --danger:#dc2626;
+    --success:#16a34a;
+
+    --white:#ffffff;
+    --light:#f5f7fb;
+    --gray:#6b7280;
+    --border:#e5e7eb;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
 
 }
 
+/* ================= RESET ================= */
 
-a{
-    text-decoration:none;
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:"Poppins",sans-serif;
+
 }
 
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--light);
+
+    color:#1f2937;
+
+    overflow-x:hidden;
+
+}
 
 img{
+
     max-width:100%;
+
     display:block;
+
 }
 
+a{
 
-/* ================= MAIN HEADER ================= */
+    text-decoration:none;
+
+}
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+}
+
+/* ================= HEADER ================= */
 
 .header{
 
-    position:sticky;
-    top:0;
-    z-index:1000;
-
     width:100%;
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    position:sticky;
 
-    padding:18px 7%;
+    top:0;
+
+    z-index:999;
 
     background:var(--white);
 
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 7%;
+
+    box-shadow:var(--shadow);
 
 }
 
-
-
-/* Logo */
+/* ================= LOGO ================= */
 
 .logo{
 
     display:flex;
+
     align-items:center;
+
     gap:15px;
 
 }
 
-
 .logo img{
 
-    width:70px;
-    height:70px;
-    object-fit:contain;
+    width:65px;
 
 }
-
 
 .logo-text h1{
 
+    font-size:30px;
+
     color:var(--secondary);
 
-    font-size:32px;
-
-    line-height:1;
-
 }
-
 
 .logo-text span{
 
     color:var(--gold);
 
-    font-size:17px;
-
-    letter-spacing:4px;
-
     font-weight:700;
 
-}
+    letter-spacing:3px;
 
+}
 
 .logo-text p{
 
-    color:var(--primary);
-
     font-size:12px;
+
+    color:var(--primary);
 
 }
 
-
-
-/* Navigation */
+/* ================= NAVBAR ================= */
 
 .navbar{
 
@@ -142,10 +154,9 @@ img{
 
 }
 
-
 .navbar a{
 
-    color:#222;
+    color:#333;
 
     font-weight:600;
 
@@ -153,17 +164,19 @@ img{
 
 }
 
-
-.navbar a:hover,
-.navbar a.active{
+.navbar a:hover{
 
     color:var(--primary);
 
 }
 
+.navbar .active{
 
+    color:var(--primary);
 
-/* Login Button */
+}
+
+/* ================= BUTTON ================= */
 
 .login-btn{
 
@@ -171,7 +184,7 @@ img{
 
     color:white;
 
-    padding:13px 28px;
+    padding:12px 28px;
 
     border-radius:10px;
 
@@ -181,7 +194,6 @@ img{
 
 }
 
-
 .login-btn:hover{
 
     background:var(--secondary);
@@ -190,11 +202,11 @@ img{
 
 }
 
-/* ===========================================
-   HERO SECTION
-   PART 2
-=========================================== */
 
+/* ==========================================
+   PART 2
+   HERO SECTION
+========================================== */
 
 .hero{
 
@@ -202,19 +214,17 @@ img{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    padding:80px 8%;
+    align-items:center;
+
+    padding:70px 8%;
 
     background:
-
     linear-gradient(
-        rgba(13,43,91,.75),
-        rgba(13,43,91,.75)
+        rgba(13,43,91,.82),
+        rgba(13,43,91,.82)
     ),
-
     url("images/hero.png");
 
     background-size:cover;
@@ -225,9 +235,7 @@ img{
 
 }
 
-
-
-/* Hero Text */
+/* ================= HERO TEXT ================= */
 
 .hero-left{
 
@@ -235,17 +243,17 @@ img{
 
 }
 
-
 .hero-left h1{
 
-    font-size:64px;
+    font-size:60px;
 
     line-height:1.2;
+
+    margin-bottom:20px;
 
     font-weight:700;
 
 }
-
 
 .hero-left span{
 
@@ -253,20 +261,17 @@ img{
 
 }
 
-
 .hero-left p{
 
     font-size:20px;
 
     line-height:1.8;
 
-    margin:30px 0;
+    margin-bottom:35px;
 
 }
 
-
-
-/* Hero Buttons */
+/* ================= HERO BUTTONS ================= */
 
 .hero-buttons{
 
@@ -276,22 +281,18 @@ img{
 
 }
 
-
-
 .primary-btn,
 .secondary-btn{
 
-    padding:16px 35px;
+    padding:15px 35px;
 
-    border-radius:12px;
+    border-radius:10px;
 
     font-weight:600;
 
     transition:.3s;
 
 }
-
-
 
 .primary-btn{
 
@@ -301,7 +302,13 @@ img{
 
 }
 
+.primary-btn:hover{
 
+    background:#087432;
+
+    transform:translateY(-4px);
+
+}
 
 .secondary-btn{
 
@@ -311,75 +318,65 @@ img{
 
 }
 
-
-
-.primary-btn:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
-
-}
-
-
-
 .secondary-btn:hover{
 
     background:white;
 
     color:var(--secondary);
 
-    transform:translateY(-5px);
-
 }
 
-
-
-/* Homepage Online Banking Card */
+/* ==========================================
+   HOMEPAGE LOGIN CARD
+========================================== */
 
 .login-card{
 
     width:360px;
 
-    background:var(--secondary);
+    background:white;
 
     padding:35px;
 
     border-radius:20px;
 
-    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
 
 }
-
-
 
 .login-card h2{
 
+    text-align:center;
+
+    color:var(--secondary);
+
     margin-bottom:25px;
 
-    color:white;
-
 }
-
-
 
 .login-card input{
 
     width:100%;
 
-    padding:15px;
+    padding:14px;
 
     margin-bottom:18px;
 
-    border-radius:8px;
+    border:1px solid var(--border);
 
-    border:none;
+    border-radius:10px;
 
     outline:none;
 
+    transition:.3s;
+
 }
 
+.login-card input:focus{
 
+    border-color:var(--primary);
+
+}
 
 .login-card button{
 
@@ -391,25 +388,19 @@ img{
 
     color:white;
 
-    border:none;
-
-    border-radius:8px;
-
     font-size:17px;
 
-    font-weight:600;
+    border-radius:10px;
+
+    transition:.3s;
 
 }
-
-
 
 .login-card button:hover{
 
-    background:var(--gold);
+    background:var(--secondary);
 
 }
-
-
 
 .login-links{
 
@@ -421,96 +412,263 @@ img{
 
 }
 
-
-
 .login-links a{
-
-    color:white;
-
-    font-size:14px;
-
-}
-/* ===========================================
-   DASHBOARD PAGES
-   PART 3
-=========================================== */
-
-
-/* Dashboard Header */
-
-.dashboard-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:18px 7%;
-
-    background:white;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-}
-
-
-.dashboard-logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-
-.dashboard-logo img{
-
-    width:55px;
-
-}
-
-
-.dashboard-logo h2{
-
-    color:var(--secondary);
-
-}
-
-
-
-.dashboard-user{
-
-    display:flex;
-
-    gap:20px;
-
-}
-
-
-.dashboard-user a{
 
     color:var(--primary);
 
-    font-weight:600;
+    font-size:14px;
+
+    font-weight:500;
+
+}
+
+.login-links a:hover{
+
+    text-decoration:underline;
 
 }
 
 
 
+/* ==========================================
+   PART 3
+   FEATURES
+========================================== */
 
-/* ================= DASHBOARD ================= */
+.features-grid{
 
+    width:90%;
+
+    margin:70px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:25px;
+
+}
+
+.feature-box{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.feature-box:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.feature-box i{
+
+    font-size:45px;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+.feature-box h4{
+
+    color:var(--secondary);
+
+    margin-bottom:15px;
+
+    font-size:22px;
+
+}
+
+.feature-box p{
+
+    color:var(--gray);
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================
+   SERVICES
+========================================== */
+
+.services{
+
+    width:90%;
+
+    margin:80px auto;
+
+}
+
+.services h2{
+
+    text-align:center;
+
+    color:var(--secondary);
+
+    font-size:38px;
+
+    margin-bottom:45px;
+
+}
+
+.service-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+.service-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.service-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.service-card i{
+
+    font-size:50px;
+
+    color:var(--secondary);
+
+    margin-bottom:20px;
+
+}
+
+.service-card h5{
+
+    color:var(--secondary);
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+}
+
+.service-card p{
+
+    color:var(--gray);
+
+    line-height:1.7;
+
+}
+
+/* ==========================================
+   COMMON CARD HOVER
+========================================== */
+
+.feature-box:hover,
+.service-card:hover{
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.12);
+
+}
+
+
+/* ==========================================
+   PART 4
+   CUSTOMER DASHBOARD
+========================================== */
 
 .dashboard{
 
-    padding:50px 8%;
+    width:90%;
+
+    margin:40px auto;
 
 }
 
+/* ================= PROFILE CARD ================= */
 
+.profile-card{
+
+    width:320px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:35px;
+
+}
+
+.profile-card img{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid var(--primary);
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+}
+
+.profile-card h2{
+
+    color:var(--secondary);
+
+    margin-bottom:12px;
+
+}
+
+.profile-card p{
+
+    color:var(--gray);
+
+    margin:8px 0;
+
+    font-size:15px;
+
+}
+
+/* ================= BALANCE CARD ================= */
 
 .balance-card{
 
@@ -522,32 +680,99 @@ img{
 
     color:white;
 
-    padding:40px;
-
     border-radius:20px;
 
-    max-width:500px;
+    padding:35px;
 
-    margin-bottom:40px;
+    margin-bottom:35px;
+
+    box-shadow:var(--shadow);
 
 }
 
+.balance-card h3{
+
+    font-size:20px;
+
+    margin-bottom:15px;
+
+    opacity:.9;
+
+}
 
 .balance-card h1{
 
-    font-size:45px;
+    font-size:42px;
 
-    margin:15px 0;
+    margin-bottom:10px;
 
 }
 
+.balance-card p{
 
+    opacity:.9;
 
+}
 
-/* Quick Actions */
+/* ================= ACTION BUTTONS ================= */
 
-.quick-actions h2,
-.recent h2{
+.actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    margin:35px 0;
+
+}
+
+.actions a{
+
+    background:white;
+
+    color:var(--secondary);
+
+    padding:18px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.actions a:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+    transform:translateY(-6px);
+
+}
+
+/* ================= TRANSACTION CARD ================= */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.card h2{
 
     color:var(--secondary);
 
@@ -555,64 +780,7 @@ img{
 
 }
 
-
-.action-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-}
-
-
-.action-grid a{
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:15px;
-
-    text-align:center;
-
-    color:var(--secondary);
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-
-.action-grid a:hover{
-
-    transform:translateY(-8px);
-
-}
-
-
-
-
-/* ================= TABLES ================= */
-
-
-.recent,
-.transactions-box{
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    margin-top:40px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
-}
-
+/* ================= TABLE ================= */
 
 table{
 
@@ -622,38 +790,45 @@ table{
 
 }
 
-
-table th{
+thead{
 
     background:var(--secondary);
 
     color:white;
 
-    padding:15px;
+}
+
+th{
+
+    padding:16px;
+
+    text-align:left;
 
 }
 
+td{
 
-
-table td{
-
-    padding:15px;
+    padding:16px;
 
     border-bottom:1px solid var(--border);
 
-    text-align:center;
+}
+
+tbody tr:hover{
+
+    background:#f8fafc;
 
 }
 
+/* ================= STATUS COLORS ================= */
 
 .success{
 
-    color:var(--primary);
+    color:var(--success);
 
     font-weight:600;
 
 }
-
 
 .pending{
 
@@ -663,185 +838,18 @@ table td{
 
 }
 
+.failed{
 
-
-
-/* ================= TRANSFER PAGE ================= */
-
-
-.transfer-page,
-.profile-page,
-.transactions-page{
-
-    min-height:100vh;
-
-    padding:60px 8%;
-
-}
-
-
-
-.transfer-box,
-.profile-box{
-
-    max-width:600px;
-
-    margin:auto;
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:20px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-
-}
-
-
-
-.transfer-box h1,
-.profile-box h1{
-
-    color:var(--secondary);
-
-    margin-bottom:15px;
-
-}
-
-
-
-.transfer-box label{
-
-    display:block;
-
-    margin-top:15px;
+    color:var(--danger);
 
     font-weight:600;
 
 }
 
-
-
-.transfer-box input,
-.transfer-box textarea{
-
-    width:100%;
-
-    padding:15px;
-
-    margin-top:8px;
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-}
-
-
-
-.transfer-box button,
-.profile-box button{
-
-    width:100%;
-
-    padding:15px;
-
-    margin-top:25px;
-
-    background:var(--primary);
-
-    color:white;
-
-    border:none;
-
-    border-radius:10px;
-
-    font-size:17px;
-
-}
-
-
-
-.secure-message{
-
-    margin-top:20px;
-
-    padding:15px;
-
-    background:#f0f8f3;
-
-    border-radius:10px;
-
-    color:var(--primary);
-
-}
-
-
-
-
-/* ================= PROFILE ================= */
-
-
-.profile-logo{
-
-    width:90px;
-
-    margin:auto;
-
-}
-
-
-
-.profile-box{
-
-    text-align:center;
-
-}
-
-
-
-.profile-info{
-
-    margin-top:30px;
-
-    text-align:left;
-
-}
-
-
-
-.profile-info div{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding:15px;
-
-    border-bottom:1px solid var(--border);
-
-}
-
-
-.back-home{
-
-    display:block;
-
-    margin-top:25px;
-
-    color:var(--primary);
-
-    font-weight:600;
-
-}
-
-
-/* ===========================================
-   LOGIN / REGISTER / FOOTER / MOBILE
-   PART 4
-=========================================== */
-
+/* ==========================================
+   PART 5
+   AUTHENTICATION PAGES
+========================================== */
 
 /* ================= LOGIN & REGISTER ================= */
 
@@ -858,13 +866,11 @@ table td{
     padding:40px;
 
     background:
-
-    linear-gradient(
-        rgba(13,43,91,.85),
-        rgba(11,143,60,.75)
-    ),
-
-    url("images/hero.png");
+        linear-gradient(
+            rgba(13,43,91,.85),
+            rgba(11,143,60,.80)
+        ),
+        url("images/hero.png");
 
     background-size:cover;
 
@@ -872,34 +878,29 @@ table td{
 
 }
 
-
 .login-box{
 
-    width:420px;
+    width:430px;
 
     background:white;
 
-    padding:40px;
+    border-radius:22px;
 
-    border-radius:20px;
+    padding:40px;
 
     text-align:center;
 
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
 
 }
 
-
-
 .login-logo{
 
-    width:80px;
+    width:85px;
 
     margin:0 auto 20px;
 
 }
-
-
 
 .login-box h1{
 
@@ -909,35 +910,35 @@ table td{
 
 }
 
-
-
 .login-box p{
 
-    color:#666;
+    color:var(--gray);
 
     margin-bottom:25px;
 
 }
 
-
+/* ================= INPUT GROUP ================= */
 
 .input-group{
 
     text-align:left;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
 }
-
-
 
 .input-group label{
 
+    display:block;
+
+    margin-bottom:8px;
+
     font-weight:600;
 
+    color:var(--secondary);
+
 }
-
-
 
 .input-group input{
 
@@ -945,15 +946,25 @@ table td{
 
     padding:15px;
 
-    margin-top:8px;
-
     border:1px solid var(--border);
 
     border-radius:10px;
 
+    outline:none;
+
+    transition:.3s;
+
 }
 
+.input-group input:focus{
 
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(11,143,60,.15);
+
+}
+
+/* ================= REMEMBER ================= */
 
 .remember{
 
@@ -965,9 +976,9 @@ table td{
 
     margin-bottom:20px;
 
+    font-size:14px;
+
 }
-
-
 
 .remember a{
 
@@ -975,46 +986,47 @@ table td{
 
 }
 
+/* ================= BUTTON ================= */
 
-
-.login-box button{
+.login-box button,
+.transfer-box button,
+.profile-box button{
 
     width:100%;
 
     padding:15px;
 
-    background:var(--primary);
-
-    color:white;
-
     border:none;
 
     border-radius:10px;
 
+    background:var(--primary);
+
+    color:white;
+
+    font-size:16px;
+
     font-weight:600;
 
-    font-size:17px;
+    transition:.3s;
 
 }
 
-
-
-.login-box button:hover{
+.login-box button:hover,
+.transfer-box button:hover,
+.profile-box button:hover{
 
     background:var(--secondary);
 
 }
 
-
-
+/* ================= REGISTER LINK ================= */
 
 .register-link{
 
-    margin-top:20px;
+    margin-top:25px;
 
 }
-
-
 
 .register-link a{
 
@@ -1024,12 +1036,348 @@ table td{
 
 }
 
+/* ==========================================
+   PROFILE PAGE
+========================================== */
+
+.profile-page,
+.transfer-page{
+
+    min-height:100vh;
+
+    padding:60px 8%;
+
+}
+
+.profile-box,
+.transfer-box{
+
+    max-width:650px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.profile-box{
+
+    text-align:center;
+
+}
+
+.profile-info{
+
+    margin-top:30px;
+
+    text-align:left;
+
+}
+
+.profile-info div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.profile-info strong{
+
+    color:var(--secondary);
+
+}
+
+.back-home{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   TRANSFER FORM
+========================================== */
+
+.transfer-box label{
+
+    display:block;
+
+    margin-top:18px;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:var(--secondary);
+
+}
+
+.transfer-box input,
+.transfer-box textarea,
+.transfer-box select{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    outline:none;
+
+}
+
+.transfer-box textarea{
+
+    resize:vertical;
+
+    min-height:120px;
+
+}
+
+.secure-message{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#f0fdf4;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    text-align:center;
+
+}
 
 
 
+/* ==========================================
+   PART 6
+   ADMIN DASHBOARD
+========================================== */
 
-/* ================= FOOTER ================= */
+.dashboard-header{
 
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+
+}
+
+.dashboard-header h1{
+
+    color:var(--secondary);
+
+}
+
+.dashboard-header button{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.dashboard-header button:hover{
+
+    background:var(--secondary);
+
+}
+
+/* ================= ADMIN CARDS ================= */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.dashboard-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.dashboard-card h2{
+
+    color:var(--secondary);
+
+    margin-bottom:15px;
+
+    font-size:20px;
+
+}
+
+.dashboard-card p{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+/* ================= ADMIN BUTTONS ================= */
+
+.admin-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+.admin-actions button{
+
+    background:var(--secondary);
+
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.admin-actions button:hover{
+
+    background:var(--primary);
+
+}
+
+/* ================= SEARCH ================= */
+
+.recent{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.recent input{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    margin-bottom:20px;
+
+    outline:none;
+
+}
+
+.recent input:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* ================= TABLE BUTTONS ================= */
+
+table button{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:8px 18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+table button:hover{
+
+    background:var(--secondary);
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
 
 footer{
 
@@ -1041,9 +1389,9 @@ footer{
 
     padding:50px 20px;
 
+    margin-top:60px;
+
 }
-
-
 
 footer h2{
 
@@ -1053,388 +1401,159 @@ footer h2{
 
 }
 
-
 footer p{
 
-    margin:10px 0;
+    margin:8px 0;
 
 }
 
-
-
-
-/* ================= HOVER EFFECTS ================= */
-
-
-.card,
-.feature,
-.action-grid a{
-
-    transition:.3s;
-
-}
-
-
-
-.card:hover,
-.feature:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 15px 30px rgba(0,0,0,.15);
-
-}
-
-
+/* ==========================================
+   GLOBAL ANIMATIONS
+========================================== */
 
 button,
 .primary-btn,
 .secondary-btn,
-.login-btn{
-
-    transition:.3s;
-
-}
-
-
-
-
-/* ================= MOBILE RESPONSIVE ================= */
-
-
-@media(max-width:1000px){
-
-
-.header,
-.dashboard-header{
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-
-.navbar{
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-}
-
-
-.hero{
-
-    flex-direction:column;
-
-    text-align:center;
-
-}
-
-
-.hero-left{
-
-    width:100%;
-
-}
-
-
-.login-card{
-
-    margin-top:40px;
-
-}
-
-
-
-.action-grid{
-
-    grid-template-columns:repeat(2,1fr);
-
-}
-
-
-}
-
-
-
-@media(max-width:600px){
-
-
-.hero-left h1{
-
-    font-size:40px;
-
-}
-
-
-.hero-left p{
-
-    font-size:17px;
-
-}
-
-
-.action-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-
-
-.login-box{
-
-    width:100%;
-
-}
-
-
-table{
-
-    font-size:13px;
-
-}
-
-
-.profile-info div{
-
-    flex-direction:column;
-
-    gap:8px;
-
-}
-
-
-}
-
-
-
-
-/* ================= FEATURES ================= */
-
-.features-grid{
-    width:90%;
-    margin:60px auto;
-    display:grid;
-    grid-template-columns:repeat(5, 1fr);
-    gap:20px;
-}
-
-.feature-box{
-    background:#fff;
-    border:1px solid #e8e8e8;
-    border-radius:15px;
-    padding:30px 20px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-    transition:.3s ease;
-}
-
-.feature-box:hover{
-    transform:translateY(-8px);
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
-
-.feature-box i{
-    font-size:45px;
-    color:#16a34a;
-    margin-bottom:18px;
-}
-
-.feature-box h4{
-    font-size:22px;
-    color:#0b2d63;
-    margin-bottom:12px;
-    font-weight:600;
-}
-
-.feature-box p{
-    font-size:15px;
-    color:#666;
-    line-height:1.6;
-}
-
-
-/* ================= SERVICES ================= */
-
-.services{
-    width:90%;
-    margin:70px auto;
-}
-
-.services h2{
-    text-align:center;
-    color:#0b2d63;
-    font-size:34px;
-    margin-bottom:40px;
-}
-
-.service-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:25px;
-}
-
+.login-btn,
+.action-grid a,
+.dashboard-card,
+.feature-box,
 .service-card{
-    background:#fff;
-    border:1px solid #e8e8e8;
-    border-radius:15px;
-    padding:35px 25px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-    transition:.3s ease;
+
+    transition:all .3s ease;
+
 }
 
-.service-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
-
-.service-card i{
-    font-size:48px;
-    color:#0b2d63;
-    margin-bottom:18px;
-}
-
-.service-card h5{
-    font-size:22px;
-    color:#0b2d63;
-    margin-bottom:15px;
-    font-weight:600;
-}
-
-.service-card p{
-    color:#666;
-    font-size:15px;
-    line-height:1.6;
-}
-
-
-/* ================= RESPONSIVE ================= */
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
 
 @media (max-width:992px){
 
+    .header{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        text-align:center;
+
+    }
+
+    .navbar{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    .hero{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:40px;
+
+    }
+
+    .hero-left{
+
+        width:100%;
+
+    }
+
+    .hero-left h1{
+
+        font-size:46px;
+
+    }
+
     .features-grid{
+
         grid-template-columns:repeat(2,1fr);
+
     }
 
     .service-grid{
+
         grid-template-columns:repeat(2,1fr);
+
     }
+
+}
+
+@media (max-width:768px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .admin-actions{
+
+        flex-direction:column;
+
+    }
+
+    .actions{
+
+        grid-template-columns:1fr;
+
+    }
+
+    table{
+
+        display:block;
+
+        overflow-x:auto;
+
+    }
+
 }
 
 @media (max-width:576px){
 
     .features-grid,
     .service-grid{
+
         grid-template-columns:1fr;
+
     }
+
+    .login-box{
+
+        width:100%;
+
+        padding:30px;
+
+    }
+
+    .profile-info div{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:8px;
+
+    }
+
+    .hero-left h1{
+
+        font-size:36px;
+
+    }
+
+    .hero-left p{
+
+        font-size:16px;
+
+    }
+
 }
-
-
-/* ===========================
-   ADMIN DASHBOARD
-=========================== */
-
-.dashboard{
-    min-height:100vh;
-    background:#f4f7fb;
-    padding:40px;
-}
-
-.dashboard-header{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.dashboard-header h1{
-    color:#0b3d91;
-    font-size:36px;
-    margin-bottom:10px;
-}
-
-.dashboard-header p{
-    color:#666;
-    font-size:18px;
-}
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    margin-bottom:40px;
-}
-
-.dashboard-card{
-    background:#ffffff;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    text-align:center;
-}
-
-.dashboard-card h2{
-    color:#0b3d91;
-    margin-bottom:15px;
-}
-
-.dashboard-card p{
-    font-size:32px;
-    font-weight:bold;
-    color:#009688;
-}
-
-.admin-actions{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-}
-
-.admin-actions button{
-    background:#0b3d91;
-    color:#fff;
-    border:none;
-    padding:15px 30px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
-}
-
-.admin-actions button:hover{
-    background:#062b68;
-}
-
-
-.profile-card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    width:300px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-.profile-card img{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    object-fit:cover;
-    margin:auto;
-}
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="user-dashboard.js"></script>
-
-
-
 
 
 

@@ -4,27 +4,54 @@
 ===================================== */
 
 
+
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
-
-
-checkAdmin();
-
-loadAccounts();
+async function(){
 
 
 
-document
-.getElementById("searchAccount")
-.addEventListener(
-"keyup",
-searchAccounts
-);
+    const allowed =
+    await checkAdmin();
+
+
+
+    if(!allowed){
+
+        return;
+
+    }
+
+
+
+    await loadAccounts();
+
+
+
+
+
+    const search =
+    document.getElementById(
+        "searchAccount"
+    );
+
+
+
+    if(search){
+
+
+        search.addEventListener(
+            "keyup",
+            searchAccounts
+        );
+
+
+    }
 
 
 
 });
+
 
 
 
@@ -39,18 +66,78 @@ let accountsData = [];
 
 
 
+
+
 /* ===============================
    ADMIN SECURITY CHECK
 ================================ */
 
 
-function checkAdmin(){
+async function checkAdmin(){
 
 
-const admin =
-JSON.parse(
-localStorage.getItem("admin")
-);
+
+try{
+
+
+
+const {
+
+data:userData,
+
+error
+
+}
+=
+await supabase.auth.getUser();
+
+
+
+
+
+
+if(error || !userData.user){
+
+
+window.location.href =
+"login.html";
+
+
+return false;
+
+
+}
+
+
+
+
+
+
+const {
+
+data:admin
+
+}
+=
+await supabase
+
+.from("admins")
+
+.select("*")
+
+.eq(
+
+"user_id",
+
+userData.user.id
+
+)
+
+.single();
+
+
+
+
 
 
 
@@ -58,15 +145,39 @@ if(!admin){
 
 
 window.location.href =
-"login.html";
+"dashboard.html";
 
 
-return;
+return false;
+
 
 }
 
 
+
+
+
+return true;
+
+
+
 }
+
+catch(error){
+
+
+console.error(error);
+
+
+return false;
+
+
+}
+
+
+
+}
+
 
 
 
@@ -83,21 +194,49 @@ return;
 async function loadAccounts(){
 
 
+
 try{
 
 
 
-const {data:accounts,error}
+const {
+
+data:accounts,
+
+error
+
+}
 =
 await supabase
+
 .from("accounts")
-.select("*")
+
+.select(`
+
+*,
+
+users(
+
+first_name,
+
+last_name
+
+)
+
+`)
+
 .order(
+
 "created_at",
+
 {
+
 ascending:false
+
 }
+
 );
+
 
 
 
@@ -105,14 +244,21 @@ ascending:false
 
 if(error){
 
+
 throw error;
+
 
 }
 
 
 
+
+
+
 accountsData =
 accounts || [];
+
+
 
 
 
@@ -122,39 +268,23 @@ accountsData
 
 
 
+
+
 }
 
 catch(error){
 
 
-console.error(
-error.message
+console.error(error);
+
+
+alert(
+"Unable to load accounts."
 );
 
 
-
-document.getElementById(
-"accountsTable"
-)
-.innerHTML =
-
-`
-
-<tr>
-
-<td colspan="7">
-
-${error.message}
-
-</td>
-
-</tr>
-
-`;
-
-
-
 }
+
 
 
 }
@@ -175,6 +305,7 @@ ${error.message}
 function displayAccounts(accounts){
 
 
+
 const table =
 document.getElementById(
 "accountsTable"
@@ -182,7 +313,35 @@ document.getElementById(
 
 
 
-table.innerHTML="";
+
+
+table.innerHTML = "";
+
+
+
+
+
+
+
+const money =
+new Intl.NumberFormat(
+
+"en-US",
+
+{
+
+style:"currency",
+
+currency:"USD"
+
+}
+
+);
+
+
+
+
+
 
 
 
@@ -195,7 +354,7 @@ table.innerHTML =
 
 <tr>
 
-<td colspan="7">
+<td colspan="6">
 
 No accounts found
 
@@ -214,19 +373,6 @@ return;
 
 
 
-const money =
-new Intl.NumberFormat(
-"en-US",
-{
-
-style:"currency",
-
-currency:"USD"
-
-});
-
-
-
 
 
 
@@ -234,19 +380,32 @@ accounts.forEach(
 account=>{
 
 
-const statusClass =
-account.status === "Active"
+
+
+
+const customer =
+
+account.users
+
 ?
-"active-status"
+
+account.users.first_name
++
+" "
++
+account.users.last_name
+
 :
-"inactive-status";
+
+"Unknown";
+
+
 
 
 
 
 
 table.innerHTML +=
-
 
 `
 
@@ -255,271 +414,7 @@ table.innerHTML +=
 
 <td>
 
-${account.account_id}
-
-</td>
-
-
-
-<td>
-
-**** **** ${
-
-String(
+****${String(
 account.account_number
 )
-.slice(-4)
-
-}
-
-</td>
-
-
-
-<td>
-
-${account.user_id}
-
-</td>
-
-
-
-<td>
-
-${account.account_type || "Checking"}
-
-</td>
-
-
-
-<td class="balance">
-
-${money.format(
-account.balance || 0
-)}
-
-</td>
-
-
-
-
-<td class="${statusClass}">
-
-${account.status}
-
-</td>
-
-
-
-
-
-<td>
-
-
-<button
-
-class="action-btn"
-
-onclick="toggleAccountStatus(
-
-'${account.account_id}',
-
-'${account.status}'
-
-)"
-
->
-
-
-${account.status === "Active"
-?
-"Disable"
-:
-"Activate"}
-
-</button>
-
-
-</td>
-
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ===============================
-   UPDATE ACCOUNT STATUS
-================================ */
-
-
-async function toggleAccountStatus(
-id,
-status
-){
-
-
-
-const newStatus =
-status === "Active"
-?
-"Inactive"
-:
-"Active";
-
-
-
-
-
-const {error}
-=
-await supabase
-.from("accounts")
-.update({
-
-status:newStatus
-
-})
-.eq(
-"account_id",
-id
-);
-
-
-
-
-
-if(error){
-
-
-alert(
-error.message
-);
-
-
-return;
-
-
-}
-
-
-
-
-
-loadAccounts();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ===============================
-   SEARCH ACCOUNTS
-================================ */
-
-
-function searchAccounts(){
-
-
-const value =
-document
-.getElementById(
-"searchAccount"
-)
-.value
-.toLowerCase();
-
-
-
-
-const filtered =
-accountsData.filter(
-account=>{
-
-
-return (
-
-String(
-account.account_number
-)
-.toLowerCase()
-.includes(value)
-
-||
-
-String(
-account.user_id
-)
-.toLowerCase()
-.includes(value)
-
-);
-
-
-});
-
-
-
-
-displayAccounts(
-filtered
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ===============================
-   LOGOUT
-================================ */
-
-
-async function logout(){
-
-
-await supabase.auth.signOut();
-
-
-localStorage.removeItem(
-"admin"
-);
-
-
-
-window.location.href =
-"login.html";
-
-
-}
+.slice(-4

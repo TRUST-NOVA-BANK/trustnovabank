@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - TrustNova Bank</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<section class="dashboard">
+
+
+<div class="dashboard-header">
+
+<h1>
+TrustNova Bank Admin Dashboard
+</h1>
+
+<p>
+Welcome, Administrator
+</p>
+
+</div>
+
+
+
+<div class="dashboard-grid">
+
+
+<div class="dashboard-card">
+
+<h2>Total Users</h2>
+
+<p id="total_users">
+Loading...
+</p>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h2>Total Accounts</h2>
+
+<p id="total_accounts">
+Loading...
+</p>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h2>Total Transactions</h2>
+
+<p id="total_transactions">
+Loading...
+</p>
+
+</div>
+
+
+
+<div class="dashboard-card">
+
+<h2>Support Tickets</h2>
+
+<p id="total_tickets">
+Loading...
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<div class="admin-actions">
+
+
+<button onclick="viewUsers()">
+Manage Users
+</button>
+
+
+<button onclick="viewAccounts()">
+Manage Accounts
+</button>
+
+
+<button onclick="viewTransactions()">
+View Transactions
+</button>
+
+
+<button onclick="logoutAdmin()">
+Logout
+</button>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="admin-dashboard.js"></script>
+
+
+</body>
+
+</html>

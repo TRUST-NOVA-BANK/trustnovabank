@@ -91,3 +91,22 @@ function searchAccounts() {
 }
 
 loadAccounts();
+
+
+
+async function logoutAdmin() {
+
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    window.location.href = "admin-login.html";
+
+}
+
+
+
+

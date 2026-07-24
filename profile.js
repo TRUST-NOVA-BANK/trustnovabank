@@ -1,90 +1,254 @@
+/* =====================================
+   TRUSTNOVA BANK
+   PROFILE SYSTEM
+===================================== */
 
-// ===============================
-// TrustNova Bank - Profile Page
-// ===============================
 
-// Check if user is logged in
-const user = JSON.parse(localStorage.getItem("user"));
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
-if (!user) {
 
-    window.location.href = "login.html";
+loadProfile();
+
+
+});
+
+
+
+
+
+/* ===============================
+   LOAD PROFILE
+================================ */
+
+
+async function loadProfile(){
+
+
+
+const user =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+
+
+if(!user){
+
+
+window.location.href =
+"login.html";
+
+
+return;
+
 
 }
 
 
-// Display user information
-document.getElementById("fullName").textContent =
-    `${user.first_name || ""} ${user.last_name || ""}`.trim();
-
-document.getElementById("email").textContent =
-    user.email || "Not Available";
-
-document.getElementById("phone").textContent =
-    user.phone || "Not Available";
-
-document.getElementById("nationality").textContent =
-    user.nationality || "Not Available";
-
-document.getElementById("sex").textContent =
-    user.sex || "Not Available";
-
-document.getElementById("dob").textContent =
-    user.dob || user.date_of_birth || "Not Available";
-
-document.getElementById("status").textContent =
-    user.status || "Active";
 
 
-// Load profile photo
-if (user.photo_url && user.photo_url !== "") {
+try{
 
-    document.getElementById("profilePhoto").src =
-        user.photo_url;
+
+
+/* LOAD USER DATA */
+
+
+const {data:userData,error:userError}
+=
+await supabase
+.from("users")
+.select("*")
+.eq(
+"user_id",
+user.id
+)
+.single();
+
+
+
+
+if(userError){
+
+throw userError;
 
 }
 
 
-// Load account information
-loadAccount();
 
 
-async function loadAccount() {
 
-    const { data, error } = await supabase
-        .from("accounts")
-        .select("*")
-        .eq("user_id", user.user_id)
-        .single();
+document.getElementById(
+"full_name"
+)
+.textContent =
 
-    if (error) {
+userData.first_name
++
+" "
++
+userData.last_name;
 
-        console.log(error);
 
-        document.getElementById("accountNumber").textContent =
-            "Not Available";
 
-        document.getElementById("accountType").textContent =
-            "Not Available";
 
-        return;
 
-    }
+document.getElementById(
+"email"
+)
+.textContent =
 
-    document.getElementById("accountNumber").textContent =
-        data.account_number;
+userData.email;
 
-    document.getElementById("accountType").textContent =
-        data.account_type;
+
+
+
+
+document.getElementById(
+"phone"
+)
+.textContent =
+
+userData.phone ||
+"N/A";
+
+
+
+
+
+if(userData.profile_photo){
+
+
+document.getElementById(
+"profile_photo"
+)
+.src =
+userData.profile_photo;
+
 
 }
 
 
-// Logout
-function logout() {
 
-    localStorage.removeItem("user");
 
-    window.location.href = "login.html";
+
+
+/* LOAD ACCOUNT DATA */
+
+
+const {data:account,error:accountError}
+=
+await supabase
+.from("accounts")
+.select("*")
+.eq(
+"user_id",
+user.id
+)
+.single();
+
+
+
+
+
+if(accountError){
+
+throw accountError;
+
+}
+
+
+
+
+
+document.getElementById(
+"account_number"
+)
+.textContent =
+
+"**** **** **** "
++
+account.account_number.slice(-4);
+
+
+
+
+
+
+
+document.getElementById(
+"account_type"
+)
+.textContent =
+
+account.account_type ||
+"Checking Account";
+
+
+
+
+
+
+
+document.getElementById(
+"account_status"
+)
+.textContent =
+
+account.status;
+
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.error(error);
+
+
+alert(
+"Unable to load profile: "
++
+error.message
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   LOGOUT
+================================ */
+
+
+async function logout(){
+
+
+await supabase.auth.signOut();
+
+
+localStorage.removeItem(
+"user"
+);
+
+
+
+window.location.href =
+"login.html";
+
 
 }

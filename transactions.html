@@ -4,43 +4,68 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Transactions | TrustNova Bank</title>
 
-<link rel="stylesheet" href="transactions.css">
+<title>
+Transactions | TrustNova Bank
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
+
 
 
 <body>
 
 
-<header class="bank-header">
+
+<header class="dashboard-header">
 
 
-<div class="bank-logo">
+<div class="dashboard-logo">
+
 
 <img src="images/logo.png" alt="TrustNova Bank">
+
 
 <h2>
 TrustNova Bank
 </h2>
 
+
 </div>
 
 
 
-<div class="header-links">
+
+
+<div class="dashboard-user">
+
 
 <a href="dashboard.html">
 Dashboard
 </a>
 
 
+<a href="transfer.html">
+Transfer
+</a>
+
+
+<a href="profile.html">
+Profile
+</a>
+
+
 <a href="#" onclick="logout()">
 Logout
 </a>
+
 
 </div>
 
@@ -51,62 +76,27 @@ Logout
 
 
 
-<main class="transactions-page">
 
 
-<section class="transactions-box">
 
 
-<div class="page-title">
+<section class="transactions-page">
+
+
+
+<div class="transactions-box">
+
+
 
 <h1>
 Transaction History
 </h1>
 
+
+
 <p>
-Review your recent banking activity
+Review your TrustNova Bank account activity.
 </p>
-
-</div>
-
-
-
-
-
-<div class="filters">
-
-
-<input
-type="text"
-id="searchTransaction"
-placeholder="Search transactions..."
->
-
-
-
-<select id="statusFilter">
-
-<option value="all">
-All Status
-</option>
-
-<option value="Completed">
-Completed
-</option>
-
-<option value="Pending">
-Pending
-</option>
-
-<option value="Failed">
-Failed
-</option>
-
-</select>
-
-
-
-</div>
 
 
 
@@ -117,19 +107,32 @@ Failed
 <table>
 
 
+
 <thead>
+
 
 <tr>
 
-<th>Date</th>
 
-<th>Description</th>
+<th>
+Date
+</th>
 
-<th>Type</th>
 
-<th>Amount</th>
+<th>
+Description
+</th>
 
-<th>Status</th>
+
+<th>
+Amount
+</th>
+
+
+<th>
+Status
+</th>
+
 
 </tr>
 
@@ -139,13 +142,17 @@ Failed
 
 
 
-<tbody id="transactionTable">
+
+<tbody id="transactionList">
 
 
 <tr>
 
-<td colspan="5">
+
+<td colspan="4">
+
 Loading transactions...
+
 </td>
 
 
@@ -155,15 +162,24 @@ Loading transactions...
 </tbody>
 
 
+
+
+
 </table>
 
+
+
+
+
+
+
+</div>
 
 
 
 </section>
 
 
-</main>
 
 
 
@@ -175,7 +191,10 @@ Loading transactions...
 
 <script src="supabase.js"></script>
 
+<script src="auth-check.js"></script>
+
 <script src="transactions.js"></script>
+
 
 
 </body>

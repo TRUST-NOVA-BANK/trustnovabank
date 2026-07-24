@@ -12,9 +12,7 @@
 
 </head>
 
-
 <body>
-
 
 <header class="dashboard-header">
 
@@ -26,14 +24,13 @@
 
     </div>
 
-
     <div class="dashboard-user">
 
         <a href="dashboard.html">
             Dashboard
         </a>
 
-        <a href="index.html">
+        <a href="#" onclick="logout()">
             Logout
         </a>
 
@@ -41,74 +38,101 @@
 
 </header>
 
-
-
-
 <section class="profile-page">
-
 
     <div class="profile-box">
 
+        <img
+            id="profilePhoto"
+            src="images/default-user.png"
+            alt="Profile"
+            class="profile-logo">
 
-        <img src="images/logo.png"
-             alt="Profile"
-             class="profile-logo">
+        <h1>Customer Profile</h1>
 
-
-        <h1>
-            Customer Profile
-        </h1>
-
-
-        <p>
-            Manage your personal banking information.
-        </p>
-
-
-
+        <p>Manage your personal banking information.</p>
 
         <div class="profile-info">
 
-
             <div>
+
                 <strong>Full Name</strong>
-                <span>John Customer</span>
+
+                <span id="fullName"></span>
+
             </div>
 
-
             <div>
+
                 <strong>Email</strong>
-                <span>customer@example.com</span>
+
+                <span id="email"></span>
+
             </div>
 
-
             <div>
+
                 <strong>Phone</strong>
-                <span>+1 800 123 4567</span>
+
+                <span id="phone"></span>
+
             </div>
 
+            <div>
+
+                <strong>Nationality</strong>
+
+                <span id="nationality"></span>
+
+            </div>
 
             <div>
+
+                <strong>Sex</strong>
+
+                <span id="sex"></span>
+
+            </div>
+
+            <div>
+
+                <strong>Date of Birth</strong>
+
+                <span id="dob"></span>
+
+            </div>
+
+            <div>
+
                 <strong>Account Number</strong>
-                <span>**** **** 4589</span>
-            </div>
 
+                <span id="accountNumber"></span>
+
+            </div>
 
             <div>
+
                 <strong>Account Type</strong>
-                <span>Premium Checking</span>
+
+                <span id="accountType"></span>
+
             </div>
 
+            <div>
+
+                <strong>Status</strong>
+
+                <span id="status"></span>
+
+            </div>
 
         </div>
 
-
-
         <button>
+
             Update Profile
+
         </button>
-
-
 
         <a href="dashboard.html" class="back-home">
 
@@ -116,16 +140,15 @@
 
         </a>
 
-
     </div>
-
 
 </section>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="profile.js"></script>
 
+<script src="supabase.js"></script>
+
+<script src="profile.js"></script>
 
 </body>
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Accounts - TrustNova Bank</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-header">
+
+<h1>Manage Bank Accounts</h1>
+
+<button onclick="window.location.href='admin-dashboard.html'">
+← Back to Dashboard
+</button>
+
+</div>
+
+
+<div class="recent">
+
+<input
+type="text"
+id="searchAccount"
+placeholder="Search by Account Number or User ID..."
+onkeyup="searchAccounts()">
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Account ID</th>
+<th>User ID</th>
+<th>Account Number</th>
+<th>Account Type</th>
+<th>Balance</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="accountsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="admin-accounts.js"></script>
+
+</body>
+
+</html>

@@ -8,11 +8,13 @@ async function loadAdminDashboard() {
 
         if (usersError) throw usersError;
 
+
         const { count: accountsCount, error: accountsError } = await supabase
             .from("accounts")
             .select("*", { count: "exact", head: true });
 
         if (accountsError) throw accountsError;
+
 
         const { count: transactionsCount, error: transactionsError } = await supabase
             .from("transactions")
@@ -20,11 +22,13 @@ async function loadAdminDashboard() {
 
         if (transactionsError) throw transactionsError;
 
+
         const { count: ticketsCount, error: ticketsError } = await supabase
             .from("support_tickets")
             .select("*", { count: "exact", head: true });
 
         if (ticketsError) throw ticketsError;
+
 
         document.getElementById("total_users").textContent = usersCount ?? 0;
         document.getElementById("total_accounts").textContent = accountsCount ?? 0;
@@ -33,24 +37,26 @@ async function loadAdminDashboard() {
 
     } catch (error) {
 
-        alert(error.message);
         console.error(error);
+        alert(error.message);
 
     }
 
 }
 
 
+// Display admin name
+const admin = JSON.parse(localStorage.getItem("admin"));
 
-const adminName = localStorage.getItem("adminName");
+if (admin) {
 
-if (adminName) {
     document.querySelector(".dashboard-header p").textContent =
-        "Welcome, " + adminName;
+        "Welcome, " + admin.full_name;
+
 }
 
 
-
+// Navigation
 function viewUsers() {
 
     window.location.href = "admin-users.html";
@@ -69,7 +75,11 @@ function viewTransactions() {
 
 }
 
+
+// Logout
 async function logoutAdmin() {
+
+    localStorage.removeItem("admin");
 
     await supabase.auth.signOut();
 
@@ -78,3 +88,9 @@ async function logoutAdmin() {
 }
 
 
+// Load dashboard
+document.addEventListener("DOMContentLoaded", function () {
+
+    loadAdminDashboard();
+
+});

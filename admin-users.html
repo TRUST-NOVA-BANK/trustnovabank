@@ -9,7 +9,7 @@
 
 
 <title>
-TrustNova Bank | Manage Users
+TrustNova Bank | Customer Management
 </title>
 
 
@@ -17,6 +17,7 @@ TrustNova Bank | Manage Users
 
 
 </head>
+
 
 
 <body>
@@ -29,15 +30,17 @@ TrustNova Bank | Manage Users
 <div class="admin-logo">
 
 
-<img src="images/logo.png">
+<img src="images/logo.png" alt="TrustNova Bank">
 
 
 <h2>
-TrustNova Bank
+TrustNova Bank Admin
 </h2>
 
 
 </div>
+
+
 
 
 
@@ -46,6 +49,16 @@ TrustNova Bank
 
 <a href="admin-dashboard.html">
 Dashboard
+</a>
+
+
+<a href="admin-accounts.html">
+Accounts
+</a>
+
+
+<a href="admin-transactions.html">
+Transactions
 </a>
 
 
@@ -65,7 +78,9 @@ Logout
 
 
 
-<section class="users-page">
+
+
+<section class="admin-page">
 
 
 
@@ -73,16 +88,17 @@ Logout
 
 
 <h1>
-Manage Customers
+Customer Management
 </h1>
 
 
 <p>
-View and manage TrustNova Bank users
+View and manage TrustNova Bank customers.
 </p>
 
 
 </div>
+
 
 
 
@@ -99,7 +115,7 @@ type="text"
 
 id="searchUser"
 
-placeholder="Search name or email..."
+placeholder="Search customers..."
 
 >
 
@@ -112,8 +128,9 @@ placeholder="Search name or email..."
 
 
 
-<div class="users-table">
 
+
+<div class="table-box">
 
 
 <table>
@@ -124,11 +141,6 @@ placeholder="Search name or email..."
 
 
 <tr>
-
-
-<th>
-ID
-</th>
 
 
 <th>
@@ -152,7 +164,7 @@ Status
 
 
 <th>
-Action
+Created
 </th>
 
 
@@ -164,14 +176,15 @@ Action
 
 
 
+
 <tbody id="usersTable">
 
 
 <tr>
 
-<td colspan="6">
+<td colspan="5">
 
-Loading users...
+Loading customers...
 
 </td>
 
@@ -187,6 +200,7 @@ Loading users...
 
 
 </div>
+
 
 
 

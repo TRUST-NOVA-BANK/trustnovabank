@@ -74,6 +74,52 @@ if(passwordInput){
 }
 
 
+async function registerUser() {
+
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
+
+  // Create account in Supabase Auth
+  const { data: authData, error: authError } = await supabase.auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (authError) {
+    alert(authError.message);
+    return;
+  }
+
+  // Save user profile in users table
+  const { error: profileError } = await supabase
+    .from("users")
+    .insert([
+      {
+        user_id: authData.user.id,
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        phone: phone,
+        password_hash: "managed_by_auth",
+        status: 1,
+        created_at: new Date()
+      }
+    ]);
+
+  if (profileError) {
+    alert(profileError.message);
+  } else {
+    alert("Registration successful!");
+  }
+
+}
+
+
+
+
 /* =========================
    BUTTON ANIMATION
 ========================= */
@@ -117,37 +163,6 @@ if(year){
     `&copy; ${currentYear} TrustNova Bank. All Rights Reserved.`;
 
 }
-
-
-
-
-
-async function registerUser() {
-
-  const full_name = document.getElementById("full_name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const password = document.getElementById("password").value;
-
-  const { data, error } = await supabase
-    .from("users")
-    .insert([
-      {
-        full_name: full_name,
-        email: email,
-        phone: phone,
-        password: password
-      }
-    ]);
-
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("Registration successful!");
-  }
-
-}
-
 
 
 

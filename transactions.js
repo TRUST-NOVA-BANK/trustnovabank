@@ -1,69 +1,22 @@
 /* =====================================
    TRUSTNOVA BANK
-   TRANSACTIONS SYSTEM
+   CUSTOMER TRANSACTION HISTORY
 ===================================== */
+
 
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+async function(){
 
 
-const user =
-JSON.parse(
-localStorage.getItem("user")
-);
-
-
-
-if(!user){
-
-window.location.href="login.html";
-
-return;
-
-}
-
-
-
-loadTransactions();
-
-
-
-const search =
-document.getElementById(
-"searchTransaction"
-);
-
-
-const filter =
-document.getElementById(
-"statusFilter"
-);
-
-
-
-search.addEventListener(
-"keyup",
-filterTransactions
-);
-
-
-
-filter.addEventListener(
-"change",
-filterTransactions
-);
-
+    await loadTransactions();
 
 
 });
 
 
 
-
-
-let allTransactions = [];
 
 
 
@@ -77,71 +30,164 @@ let allTransactions = [];
 async function loadTransactions(){
 
 
+
 try{
 
 
-const {data:account,error:accountError}
-=
-await supabase
-.from("accounts")
-.select("account_id")
-.eq(
-"user_id",
-JSON.parse(
-localStorage.getItem("user")
-).id
-)
-.single();
 
+    const {
 
+        data:userData,
 
+        error:userError
 
-if(accountError){
-
-throw accountError;
-
-}
+    } =
+    await supabase.auth.getUser();
 
 
 
 
 
-const {data:transactions,error}
-=
-await supabase
-.from("transactions")
-.select("*")
-.eq(
-"account_id",
-account.account_id
-)
-.order(
-"transaction_date",
-{
-ascending:false
-}
-);
+    if(userError || !userData.user){
+
+
+        window.location.href =
+        "login.html";
+
+
+        return;
+
+
+    }
 
 
 
 
 
-if(error){
-
-throw error;
-
-}
 
 
-
-allTransactions =
-transactions || [];
+    const user =
+    userData.user;
 
 
 
-displayTransactions(
-allTransactions
-);
+
+
+
+
+    /*
+        Get customer account
+    */
+
+
+    const {
+
+        data:account,
+
+        error:accountError
+
+    } =
+    await supabase
+
+    .from("accounts")
+
+    .select("*")
+
+    .eq(
+
+        "user_id",
+
+        user.id
+
+    )
+
+    .single();
+
+
+
+
+
+
+    if(accountError){
+
+
+        throw accountError;
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /*
+        Get transactions
+    */
+
+
+    const {
+
+        data:transactions,
+
+        error:transactionError
+
+    } =
+    await supabase
+
+    .from("transactions")
+
+    .select("*")
+
+    .eq(
+
+        "account_id",
+
+        account.account_id
+
+    )
+
+    .order(
+
+        "transaction_date",
+
+        {
+
+            ascending:false
+
+        }
+
+    );
+
+
+
+
+
+
+
+    if(transactionError){
+
+
+        throw transactionError;
+
+
+    }
+
+
+
+
+
+
+
+
+    displayTransactions(
+        transactions
+    );
+
+
 
 
 
@@ -150,32 +196,23 @@ allTransactions
 catch(error){
 
 
-console.error(error);
+
+    console.error(error);
 
 
-document.getElementById(
-"transactionTable"
-)
-.innerHTML =
-`
+    alert(
+    "Unable to load transactions."
+    );
 
-<tr>
 
-<td colspan="5">
-
-${error.message}
-
-</td>
-
-</tr>
-
-`;
 
 }
 
 
 
 }
+
+
 
 
 
@@ -196,39 +233,27 @@ transactions
 
 const table =
 document.getElementById(
-"transactionTable"
+"transactionList"
 );
+
+
+
+
+
+if(!table){
+
+    return;
+
+}
+
+
+
 
 
 
 table.innerHTML="";
 
 
-
-
-
-if(transactions.length===0){
-
-
-table.innerHTML=
-`
-
-<tr>
-
-<td colspan="5">
-
-No transactions found
-
-</td>
-
-</tr>
-
-`;
-
-
-return;
-
-}
 
 
 
@@ -249,14 +274,59 @@ currency:"USD"
 
 
 
+
+
+if(
+transactions.length === 0
+){
+
+
+table.innerHTML =
+
+`
+
+<tr>
+
+<td colspan="4">
+
+No transactions available
+
+</td>
+
+</tr>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
 transactions.forEach(
 transaction=>{
 
 
 
-let statusClass =
-transaction.status
-.toLowerCase();
+const date =
+
+new Date(
+transaction.transaction_date
+)
+
+.toLocaleDateString(
+"en-US"
+);
+
+
+
+
 
 
 
@@ -269,12 +339,7 @@ table.innerHTML +=
 
 <td>
 
-${new Date(
-transaction.transaction_date
-)
-.toLocaleDateString(
-"en-US"
-)}
+${date}
 
 </td>
 
@@ -282,16 +347,7 @@ transaction.transaction_date
 
 <td>
 
-${transaction.description ||
-"Bank Transaction"}
-
-</td>
-
-
-
-<td>
-
-${transaction.transaction_type}
+${transaction.description || "Transfer"}
 
 </td>
 
@@ -307,15 +363,15 @@ transaction.amount
 
 
 
-<td class="${statusClass}">
+<td>
 
 ${transaction.status}
 
 </td>
 
 
-
 </tr>
+
 
 `;
 
@@ -324,128 +380,6 @@ ${transaction.status}
 });
 
 
-}
-
-
-
-
-
-
-
-/* ===============================
-   SEARCH + FILTER
-================================ */
-
-
-function filterTransactions(){
-
-
-const searchValue =
-document
-.getElementById(
-"searchTransaction"
-)
-.value
-.toLowerCase();
-
-
-
-const statusValue =
-document
-.getElementById(
-"statusFilter"
-)
-.value;
-
-
-
-
-
-const filtered =
-allTransactions.filter(
-transaction=>{
-
-
-
-const matchesSearch =
-
-(
-transaction.description ||
-""
-)
-.toLowerCase()
-.includes(searchValue)
-
-||
-
-(
-transaction.transaction_type ||
-""
-)
-.toLowerCase()
-.includes(searchValue);
-
-
-
-
-
-const matchesStatus =
-
-statusValue === "all"
-
-||
-
-transaction.status === statusValue;
-
-
-
-
-return matchesSearch &&
-matchesStatus;
-
-
-
-});
-
-
-
-
-displayTransactions(
-filtered
-);
-
 
 
 }
-
-
-
-
-
-
-
-/* ===============================
-   LOGOUT
-================================ */
-
-
-async function logout(){
-
-
-await supabase.auth.signOut();
-
-
-localStorage.removeItem(
-"user"
-);
-
-
-
-window.location.href =
-"login.html";
-
-
-}
-
-
-

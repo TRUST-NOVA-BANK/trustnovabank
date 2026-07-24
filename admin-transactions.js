@@ -6,8 +6,10 @@ async function loadTransactions() {
         .order("transaction_id", { ascending: false });
 
     if (error) {
+
         alert(error.message);
         return;
+
     }
 
     const table = document.getElementById("transactionsTable");
@@ -16,21 +18,23 @@ async function loadTransactions() {
 
     transactions.forEach(transaction => {
 
+        const amount = Number(transaction.amount || 0).toLocaleString();
+
         table.innerHTML += `
 
         <tr>
 
-        <td>${transaction.transaction_id}</td>
+            <td>${transaction.transaction_id}</td>
 
-        <td>${transaction.account_id}</td>
+            <td>${transaction.account_id}</td>
 
-        <td>${transaction.transaction_type}</td>
+            <td>${transaction.transaction_type}</td>
 
-        <td>₦${Number(transaction.amount).toLocaleString()}</td>
+            <td>₦${amount}</td>
 
-        <td>${transaction.status}</td>
+            <td>${transaction.status}</td>
 
-        <td>${transaction.transaction_date}</td>
+            <td>${transaction.transaction_date}</td>
 
         </tr>
 
@@ -40,21 +44,33 @@ async function loadTransactions() {
 
 }
 
+
+
 function searchTransactions() {
 
-    const input = document.getElementById("searchTransaction").value.toLowerCase();
+    const input = document
+        .getElementById("searchTransaction")
+        .value
+        .toLowerCase();
 
     const rows = document.querySelectorAll("#transactionsTable tr");
 
     rows.forEach(row => {
 
-        row.style.display =
-            row.innerText.toLowerCase().includes(input)
-                ? ""
-                : "none";
+        row.style.display = row.innerText
+            .toLowerCase()
+            .includes(input)
+            ? ""
+            : "none";
 
     });
 
 }
 
-loadTransactions();
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    loadTransactions();
+
+});

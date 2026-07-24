@@ -1,6 +1,6 @@
 /* =====================================
    TRUSTNOVA BANK
-   ADMIN ACCOUNTS CSS
+   ADMIN ACCOUNTS PAGE STYLE
 ===================================== */
 
 
@@ -8,7 +8,6 @@
 
     --green:#00843D;
     --navy:#003B5C;
-    --gold:#FFC72C;
     --light:#F4F7FA;
     --white:#FFFFFF;
     --border:#E5E7EB;
@@ -22,7 +21,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',Arial,sans-serif;
+    font-family:Arial,sans-serif;
 
 }
 
@@ -32,7 +31,7 @@ body{
 
     background:var(--light);
 
-    color:#1F2937;
+    color:#333;
 
 }
 
@@ -48,15 +47,16 @@ a{
 
 
 
-/* ================= HEADER ================= */
+
+
+/* HEADER */
 
 
 .admin-header{
 
-
     background:white;
 
-    padding:18px 7%;
+    padding:20px 7%;
 
     display:flex;
 
@@ -66,7 +66,6 @@ a{
 
     box-shadow:
     0 5px 20px rgba(0,0,0,.08);
-
 
 }
 
@@ -86,7 +85,7 @@ a{
 
 .admin-logo img{
 
-    width:60px;
+    width:55px;
 
 }
 
@@ -101,13 +100,22 @@ a{
 
 
 
-.admin-links a{
 
-    margin-left:20px;
+.admin-links{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+
+
+.admin-links a{
 
     color:var(--green);
 
-    font-weight:600;
+    font-weight:bold;
 
 }
 
@@ -115,22 +123,14 @@ a{
 
 
 
-/* ================= PAGE ================= */
 
 
-.accounts-page{
+/* PAGE */
+
+
+.admin-page{
 
     padding:50px 7%;
-
-}
-
-
-
-
-
-.page-title{
-
-    margin-bottom:30px;
 
 }
 
@@ -148,9 +148,9 @@ a{
 
 .page-title p{
 
-    color:#666;
+    margin-top:10px;
 
-    margin-top:8px;
+    color:#666;
 
 }
 
@@ -159,23 +159,13 @@ a{
 
 
 
-/* ================= SEARCH ================= */
+
+/* SEARCH */
 
 
 .search-box{
 
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    margin-bottom:25px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.08);
-
+    margin:30px 0;
 
 }
 
@@ -183,14 +173,17 @@ a{
 
 .search-box input{
 
-
     width:100%;
 
     padding:15px;
 
-    border:1px solid var(--border);
+    border:
+
+    1px solid var(--border);
 
     border-radius:10px;
+
+    font-size:16px;
 
     outline:none;
 
@@ -200,7 +193,6 @@ a{
 
 .search-box input:focus{
 
-
     border-color:var(--green);
 
 }
@@ -209,21 +201,24 @@ a{
 
 
 
-/* ================= TABLE ================= */
 
 
-.accounts-table{
+/* TABLE */
 
+
+.table-box{
 
     background:white;
 
     padding:25px;
 
-    border-radius:18px;
+    border-radius:15px;
 
     box-shadow:
+
     0 8px 25px rgba(0,0,0,.08);
 
+    overflow-x:auto;
 
 }
 
@@ -231,11 +226,9 @@ a{
 
 table{
 
-
     width:100%;
 
     border-collapse:collapse;
-
 
 }
 
@@ -243,127 +236,43 @@ table{
 
 thead th{
 
-
     background:var(--navy);
 
     color:white;
 
     padding:15px;
 
-    text-align:center;
-
-
 }
 
 
 
-
 tbody td{
-
 
     padding:15px;
 
     text-align:center;
 
     border-bottom:
+
     1px solid var(--border);
 
-
 }
-
-
 
 
 
 tbody tr:hover{
 
-
-    background:#F8FAFC;
-
+    background:#f8fafc;
 
 }
 
 
 
-
-
-
-/* ================= BUTTON ================= */
-
-
-.action-btn{
-
-
-    background:var(--green);
-
-    color:white;
-
-    border:none;
-
-    padding:10px 18px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-
-}
-
-
-
-.action-btn:hover{
-
-
-    background:var(--navy);
-
-
-}
-
-
-
-
-
-
-/* ================= BALANCE ================= */
-
-
-.balance{
-
+.status{
 
     color:var(--green);
 
-    font-weight:700;
-
-}
-
-
-
-
-
-/* ================= STATUS ================= */
-
-
-.active-status{
-
-
-    color:var(--green);
-
-    font-weight:600;
-
-
-}
-
-
-
-.inactive-status{
-
-
-    color:#C0392B;
-
-    font-weight:600;
-
+    font-weight:bold;
 
 }
 
@@ -372,42 +281,27 @@ tbody tr:hover{
 
 
 
-/* ================= MOBILE ================= */
 
-
-@media(max-width:800px){
+@media(max-width:700px){
 
 
 .admin-header{
-
 
     flex-direction:column;
 
     gap:15px;
 
-
 }
 
 
 
-.accounts-table{
+.admin-links{
 
+    flex-wrap:wrap;
 
-    overflow-x:auto;
-
-
-}
-
-
-
-table{
-
-
-    font-size:13px;
-
+    justify-content:center;
 
 }
-
 
 
 }

@@ -3,12 +3,12 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transfer Money | TrustNova Bank</title>
+<title>Transfer Money | TrustNova Bank</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="transfer.css">
 
 </head>
 
@@ -16,148 +16,139 @@
 <body>
 
 
-<!-- Header -->
-
-<header class="dashboard-header">
-
-    <div class="dashboard-logo">
-
-        <img src="images/logo.png" alt="TrustNova Bank">
-
-        <h2>TrustNova Bank</h2>
-
-    </div>
+<header class="bank-header">
 
 
-    <div class="dashboard-user">
+<div class="bank-logo">
 
-        <a href="dashboard.html">
-            Dashboard
-        </a>
+<img src="images/logo.png">
 
-        <a href="index.html">
-            Logout
-        </a>
+<h2>
+TrustNova Bank
+</h2>
 
-    </div>
+</div>
+
+
+<div>
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+
+<a href="#" onclick="logout()">
+Logout
+</a>
+
+</div>
+
 
 </header>
 
 
 
 
-<!-- Transfer Section -->
 
 <section class="transfer-page">
 
 
-    <div class="transfer-box">
+<div class="transfer-box">
 
 
-        <h1>
-            💸 Send Money
-        </h1>
+<h1>
+Transfer Money
+</h1>
 
 
-        <p>
-            Make a secure transfer from your TrustNova account.
-        </p>
-
-
-
-        <form id="transferForm">
-
-
-            <label>
-                Recipient Name
-            </label>
-
-            <input 
-            type="text"
-            placeholder="Enter recipient name"
-            required>
-
-
-
-            <label>
-                Account Number
-            </label>
-
-            <input 
-            type="number"
-            placeholder="Enter account number"
-            required>
+<p>
+Send money securely from your TrustNova account.
+</p>
 
 
 
 
-            <label>
-                Bank Name
-            </label>
-
-            <input 
-            type="text"
-            placeholder="Enter bank name"
-            required>
+<form id="transferForm">
 
 
 
+<label>
+Recipient Account Number
+</label>
 
-            <label>
-                Amount
-            </label>
 
-            <input 
-            type="number"
-            placeholder="$0.00"
-            required>
+<input 
+type="text"
+id="recipient_account"
+placeholder="Enter account number"
+required>
 
 
 
 
-            <label>
-                Description
-            </label>
-
-            <textarea
-            placeholder="Transfer purpose"></textarea>
+<label>
+Amount (USD)
+</label>
 
 
-
-
-            <button type="submit">
-                Confirm Transfer
-            </button>
-
-
-        </form>
+<input 
+type="number"
+id="amount"
+placeholder="0.00"
+step="0.01"
+required>
 
 
 
-        <div class="secure-message">
 
-            🔒 Your transfer is protected by TrustNova security.
-
-        </div>
-
+<label>
+Description
+</label>
 
 
-        <a href="dashboard.html" class="back-home">
+<textarea
+id="description"
+placeholder="Payment description">
+</textarea>
 
-            ← Back to Dashboard
-
-        </a>
 
 
-    </div>
+
+
+<button type="submit">
+
+Send Transfer
+
+</button>
+
+
+
+</form>
+
+
+
+
+
+<div id="message"></div>
+
+
+
+
+</div>
 
 
 </section>
 
 
 
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="transfer.js"></script> 
+
+<script src="supabase.js"></script>
+
+<script src="transfer.js"></script>
 
 
 </body>

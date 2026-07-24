@@ -40,21 +40,30 @@ async function loadAdminDashboard() {
 
 }
 
-function logoutAdmin() {
-    supabase.auth.signOut();
-    window.location.href = "admin-login.html";
-}
-
 function viewUsers() {
+
     window.location.href = "admin-users.html";
+
 }
 
 function viewAccounts() {
+
     window.location.href = "admin-accounts.html";
+
 }
 
 function viewTransactions() {
+
     window.location.href = "admin-transactions.html";
+
 }
 
-loadAdminDashboard();
+async function logoutAdmin() {
+
+    await supabase.auth.signOut();
+
+    window.location.href = "admin-login.html";
+
+}
+
+

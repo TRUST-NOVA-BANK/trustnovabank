@@ -1,35 +1,43 @@
 /* =====================================
    TRUSTNOVA BANK
-   ADMIN USER MANAGEMENT
+   ADMIN CUSTOMER MANAGEMENT
 ===================================== */
 
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+async function(){
 
 
-checkAdmin();
-
-loadUsers();
-
-
-
-const search =
-document.getElementById(
-"searchUser"
-);
+    const allowed =
+    await checkAdmin();
 
 
 
-search.addEventListener(
-"keyup",
-searchUsers
-);
+    if(!allowed){
 
+        return;
+
+    }
+
+
+
+    await loadUsers();
+
+
+
+
+
+    document
+    .getElementById("searchUser")
+    .addEventListener(
+        "keyup",
+        searchUsers
+    );
 
 
 });
+
 
 
 
@@ -43,18 +51,71 @@ let usersData = [];
 
 
 
+
+
 /* ===============================
-   ADMIN CHECK
+   ADMIN SECURITY
 ================================ */
 
 
-function checkAdmin(){
+async function checkAdmin(){
 
 
-const admin =
-JSON.parse(
-localStorage.getItem("admin")
-);
+const {
+
+data:userData,
+
+error
+
+}
+=
+await supabase.auth.getUser();
+
+
+
+
+
+if(error || !userData.user){
+
+
+window.location.href =
+"login.html";
+
+
+return false;
+
+
+}
+
+
+
+
+
+
+const {
+
+data:admin
+
+}
+=
+await supabase
+
+.from("admins")
+
+.select("*")
+
+.eq(
+
+"user_id",
+
+userData.user.id
+
+)
+
+.single();
+
+
+
 
 
 
@@ -62,10 +123,17 @@ if(!admin){
 
 
 window.location.href =
-"login.html";
+"dashboard.html";
+
+
+return false;
 
 
 }
+
+
+
+return true;
 
 
 }
@@ -89,18 +157,32 @@ async function loadUsers(){
 try{
 
 
+const {
 
-const {data:users,error}
+data:users,
+
+error
+
+}
 =
 await supabase
+
 .from("users")
+
 .select("*")
+
 .order(
+
 "created_at",
+
 {
+
 ascending:false
+
 }
+
 );
+
 
 
 
@@ -110,7 +192,6 @@ if(error){
 throw error;
 
 }
-
 
 
 
@@ -130,37 +211,10 @@ usersData
 catch(error){
 
 
-console.error(
-error.message
-);
-
-
-
-document.getElementById(
-"usersTable"
-)
-.innerHTML =
-
-
-`
-
-<tr>
-
-<td colspan="6">
-
-${error.message}
-
-</td>
-
-</tr>
-
-
-`;
-
+console.error(error);
 
 
 }
-
 
 
 }
@@ -189,6 +243,7 @@ document.getElementById(
 
 
 
+
 table.innerHTML="";
 
 
@@ -204,17 +259,15 @@ table.innerHTML =
 
 <tr>
 
-<td colspan="6">
+<td colspan="5">
 
-No users found
+No customers found
 
 </td>
 
 </tr>
 
-
 `;
-
 
 return;
 
@@ -231,19 +284,7 @@ users.forEach(
 user=>{
 
 
-const statusClass =
-user.status === "Active"
-?
-"active-status"
-:
-"inactive-status";
-
-
-
-
-
 table.innerHTML +=
-
 
 `
 
@@ -252,19 +293,10 @@ table.innerHTML +=
 
 <td>
 
-${user.user_id}
+${user.first_name}
+${user.last_name}
 
 </td>
-
-
-
-<td>
-
-${user.first_name || ""}
-${user.last_name || ""}
-
-</td>
-
 
 
 <td>
@@ -274,54 +306,37 @@ ${user.email}
 </td>
 
 
-
 <td>
 
-${user.phone || "N/A"}
+${user.phone || "-"}
 
 </td>
 
 
+<td>
 
-
-<td class="${statusClass}">
+<span class="status">
 
 ${user.status}
 
+</span>
+
 </td>
-
-
 
 
 <td>
 
-
-<button
-
-class="action-btn"
-
-onclick="toggleUserStatus(
-'${user.user_id}',
-'${user.status}'
-)"
-
->
-
-${user.status === "Active"
-?
-"Deactivate"
-:
-"Activate"}
-
-</button>
-
+${new Date(
+user.created_at
+)
+.toLocaleDateString(
+"en-US"
+)}
 
 </td>
 
 
-
 </tr>
-
 
 `;
 
@@ -330,78 +345,8 @@ ${user.status === "Active"
 });
 
 
-
 }
 
-
-
-
-
-
-
-
-/* ===============================
-   CHANGE USER STATUS
-================================ */
-
-
-async function toggleUserStatus(
-id,
-status
-){
-
-
-
-const newStatus =
-status === "Active"
-?
-"Inactive"
-:
-"Active";
-
-
-
-
-
-const {error}
-=
-await supabase
-.from("users")
-.update({
-
-status:newStatus
-
-})
-.eq(
-"user_id",
-id
-);
-
-
-
-
-
-if(error){
-
-
-alert(
-error.message
-);
-
-
-return;
-
-
-}
-
-
-
-
-loadUsers();
-
-
-
-}
 
 
 
@@ -421,11 +366,15 @@ function searchUsers(){
 
 const value =
 document
+
 .getElementById(
 "searchUser"
 )
+
 .value
+
 .toLowerCase();
+
 
 
 
@@ -435,41 +384,29 @@ usersData.filter(
 user=>{
 
 
-const name =
-
-(
-user.first_name +
-" " +
-user.last_name
-)
-.toLowerCase();
-
-
-
-
-const email =
-
-(
-user.email ||
-""
-)
-.toLowerCase();
-
-
-
-
 return (
 
-name.includes(value)
+user.first_name
++
+" "
++
+user.last_name
++
+" "
++
+user.email
 
-||
+)
 
-email.includes(value)
+.toLowerCase()
 
+.includes(
+value
 );
 
 
 });
+
 
 
 
@@ -488,6 +425,8 @@ filtered
 
 
 
+
+
 /* ===============================
    LOGOUT
 ================================ */
@@ -499,11 +438,9 @@ async function logout(){
 await supabase.auth.signOut();
 
 
-
 localStorage.removeItem(
 "admin"
 );
-
 
 
 window.location.href =

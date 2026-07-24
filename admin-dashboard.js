@@ -4,14 +4,28 @@
 ===================================== */
 
 
+
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+async function(){
 
 
-checkAdmin();
+    const allowed =
+    await checkAdmin();
 
-loadStatistics();
+
+
+    if(!allowed){
+
+        return;
+
+    }
+
+
+
+
+    loadStatistics();
+
 
 
 });
@@ -21,53 +35,147 @@ loadStatistics();
 
 
 
+
+
+
 /* ===============================
-   ADMIN CHECK
+   ADMIN SECURITY CHECK
 ================================ */
 
 
-function checkAdmin(){
-
-
-const admin =
-JSON.parse(
-localStorage.getItem("admin")
-);
+async function checkAdmin(){
 
 
 
-if(!admin){
+try{
 
 
-window.location.href =
-"login.html";
+
+    const {
+
+        data:userData,
+
+        error
+
+    } =
+    await supabase.auth.getUser();
 
 
-return;
+
+
+
+
+    if(error || !userData.user){
+
+
+        window.location.href =
+        "login.html";
+
+
+        return false;
+
+
+    }
+
+
+
+
+
+
+    const user =
+    userData.user;
+
+
+
+
+
+
+
+
+    const {
+
+        data:admin
+
+    } =
+    await supabase
+
+    .from("admins")
+
+    .select("*")
+
+    .eq(
+
+        "user_id",
+
+        user.id
+
+    )
+
+    .single();
+
+
+
+
+
+
+
+
+    if(!admin){
+
+
+        window.location.href =
+        "dashboard.html";
+
+
+        return false;
+
+
+    }
+
+
+
+
+
+
+    localStorage.setItem(
+
+        "admin",
+
+        JSON.stringify(admin)
+
+    );
+
+
+
+
+
+    return true;
+
+
+
+
+}
+
+catch(error){
+
+
+    console.error(error);
+
+
+    window.location.href =
+    "login.html";
+
+
+    return false;
 
 
 }
 
 
 
-const adminName =
-document.getElementById(
-"admin_name"
-);
-
-
-
-if(adminName){
-
-adminName.textContent =
-admin.full_name ||
-"Administrator";
-
 }
 
 
-
-}
 
 
 
@@ -76,7 +184,7 @@ admin.full_name ||
 
 
 /* ===============================
-   LOAD BANK STATISTICS
+   LOAD STATISTICS
 ================================ */
 
 
@@ -88,110 +196,191 @@ try{
 
 
 
-/* TOTAL USERS */
 
 
-const {count:userCount,error:userError}
+const {
+
+count:customers
+
+}
+
 =
+
 await supabase
+
 .from("users")
+
 .select(
+
 "*",
+
 {
+
 count:"exact",
+
 head:true
+
 }
+
 );
 
 
 
-if(userError)
-throw userError;
-
-
-
-
-
-document.getElementById(
-"total_users"
-)
-.textContent =
-userCount || 0;
 
 
 
 
 
 
+const {
 
+count:accounts
 
+}
 
-/* TOTAL ACCOUNTS */
-
-
-const {count:accountCount,error:accountError}
 =
+
 await supabase
+
 .from("accounts")
+
 .select(
+
 "*",
+
 {
+
 count:"exact",
+
 head:true
+
 }
+
 );
 
 
 
 
 
-if(accountError)
-throw accountError;
 
 
 
 
+const {
 
-document.getElementById(
-"total_accounts"
-)
-.textContent =
-accountCount || 0;
+data:balances
 
+}
 
-
-
-
-
-
-
-
-/* TRANSACTIONS */
-
-
-const {data:transactions,error:transactionError}
 =
+
 await supabase
-.from("transactions")
+
+.from("accounts")
+
 .select(
-"amount"
+
+"balance"
+
 );
 
 
 
 
-if(transactionError)
-throw transactionError;
+
+
+
+let totalBalance = 0;
+
+
+
+
+
+balances.forEach(
+
+account=>{
+
+
+totalBalance +=
+
+Number(
+account.balance || 0
+);
+
+
+}
+
+);
+
+
+
+
+
+
+
+
+
+const {
+
+count:transactions
+
+}
+
+=
+
+await supabase
+
+.from("transactions")
+
+.select(
+
+"*",
+
+{
+
+count:"exact",
+
+head:true
+
+}
+
+);
+
+
+
+
 
 
 
 
 
 document.getElementById(
-"total_transactions"
+"totalCustomers"
 )
 .textContent =
-transactions.length;
+customers || 0;
+
+
+
+
+
+
+document.getElementById(
+"totalAccounts"
+)
+.textContent =
+accounts || 0;
+
+
+
+
+
+
+document.getElementById(
+"totalTransactions"
+)
+.textContent =
+transactions || 0;
 
 
 
@@ -199,50 +388,29 @@ transactions.length;
 
 
 
-/* TOTAL VOLUME */
+document.getElementById(
+"totalBalance"
+)
+.textContent =
 
-
-let totalVolume = 0;
-
-
-
-transactions.forEach(
-(transaction)=>{
-
-
-totalVolume +=
-Number(transaction.amount);
-
-
-});
-
-
-
-
-
-
-const money =
 new Intl.NumberFormat(
+
 "en-US",
+
 {
 
 style:"currency",
 
 currency:"USD"
 
-});
+}
 
-
-
-
-
-document.getElementById(
-"total_volume"
 )
-.textContent =
-money.format(
-totalVolume
+
+.format(
+totalBalance
 );
+
 
 
 
@@ -253,14 +421,25 @@ totalVolume
 catch(error){
 
 
-console.error(
-error.message
+
+console.error(error);
+
+
+alert(
+"Unable to load dashboard statistics."
 );
 
 
-}
 
 }
+
+
+
+}
+
+
+
+
 
 
 
@@ -274,7 +453,9 @@ error.message
 async function logout(){
 
 
+
 await supabase.auth.signOut();
+
 
 
 localStorage.removeItem(
@@ -283,8 +464,15 @@ localStorage.removeItem(
 
 
 
+localStorage.removeItem(
+"user"
+);
+
+
+
 window.location.href =
 "login.html";
+
 
 
 }

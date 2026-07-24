@@ -4,37 +4,22 @@ document
 
 e.preventDefault();
 
-
 const email = document.getElementById("admin_email").value;
 const password = document.getElementById("admin_password").value;
 
 
-// Login with Supabase Auth
-const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-});
-
-
-if(error){
-    alert(error.message);
-    return;
-}
-
-
 // Check admin table
-const { data: admin, error: adminError } = await supabase
+const { data: admin, error } = await supabase
 .from("admins")
 .select("*")
-.eq("user_id", data.user.id)
+.eq("email", email)
+.eq("password_hash", password)
 .single();
 
 
-if(adminError){
+if(error){
 
-    alert("Access denied. Not an admin.");
-
-    await supabase.auth.signOut();
+    alert("Invalid admin login");
 
 } else {
 

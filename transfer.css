@@ -1,0 +1,343 @@
+/* =====================================
+   TRUSTNOVA BANK
+   TRANSFER PAGE CSS
+===================================== */
+
+
+:root{
+
+    --green:#00843D;
+    --navy:#003B5C;
+    --gold:#FFC72C;
+    --light:#F4F7FA;
+    --white:#FFFFFF;
+    --border:#E5E7EB;
+
+}
+
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',Arial,sans-serif;
+
+}
+
+
+
+body{
+
+    background:var(--light);
+
+    color:#1F2937;
+
+}
+
+
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+
+/* ================= HEADER ================= */
+
+
+.bank-header{
+
+    background:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 7%;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.bank-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.bank-logo img{
+
+    width:60px;
+
+}
+
+
+
+.bank-logo h2{
+
+    color:var(--navy);
+
+}
+
+
+
+.bank-header a{
+
+    margin-left:20px;
+
+    color:var(--green);
+
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ================= TRANSFER PAGE ================= */
+
+
+.transfer-page{
+
+    min-height:calc(100vh - 100px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px 20px;
+
+}
+
+
+
+.transfer-box{
+
+    background:white;
+
+    width:100%;
+
+    max-width:550px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+
+
+.transfer-box h1{
+
+    color:var(--navy);
+
+    margin-bottom:10px;
+
+    text-align:center;
+
+}
+
+
+
+.transfer-box p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+/* ================= FORM ================= */
+
+
+.transfer-box label{
+
+    display:block;
+
+    margin-top:20px;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:var(--navy);
+
+}
+
+
+
+.transfer-box input,
+.transfer-box textarea{
+
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+
+
+.transfer-box input:focus,
+.transfer-box textarea:focus{
+
+    border-color:var(--green);
+
+}
+
+
+
+.transfer-box textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+
+
+
+
+/* ================= BUTTON ================= */
+
+
+.transfer-box button{
+
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px;
+
+    background:var(--green);
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.transfer-box button:hover{
+
+    background:var(--navy);
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+/* ================= MESSAGE ================= */
+
+
+#message{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    padding:12px;
+
+    border-radius:10px;
+
+}
+
+
+
+.success-message{
+
+    background:#E8F8EE;
+
+    color:var(--green);
+
+}
+
+
+
+.error-message{
+
+    background:#FDECEC;
+
+    color:#C0392B;
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:600px){
+
+
+.bank-header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+.transfer-box{
+
+    padding:25px;
+
+}
+
+
+}
+

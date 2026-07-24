@@ -1,478 +1,443 @@
 /* =====================================
    TRUSTNOVA BANK
-   TRANSFER MONEY SYSTEM
+   MONEY TRANSFER SYSTEM
 ===================================== */
 
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
-
-
-const user =
-JSON.parse(
-localStorage.getItem("user")
-);
+function(){
 
 
 
-if(!user){
-
-window.location.href="login.html";
-
-return;
-
-}
-
-
-
-const form =
+const transferForm =
 document.getElementById(
 "transferForm"
 );
 
 
 
-form.addEventListener(
+if(!transferForm){
+
+    return;
+
+}
+
+
+
+
+
+transferForm.addEventListener(
 "submit",
-async(e)=>{
+async function(e){
 
 
-e.preventDefault();
+    e.preventDefault();
 
 
 
-const recipientAccount =
-document
-.getElementById(
-"recipient_account"
-)
-.value
-.trim();
 
 
+    const recipient =
+    document
+    .getElementById("recipient")
+    .value
+    .trim();
 
-const amount =
-Number(
-document
-.getElementById(
-"amount"
-)
-.value
-);
 
 
 
-const description =
-document
-.getElementById(
-"description"
-)
-.value
-.trim();
+    const amount =
+    Number(
+    document
+    .getElementById("amount")
+    .value
+    );
 
 
 
 
-const message =
-document.getElementById(
-"message"
-);
+    const description =
+    document
+    .getElementById("description")
+    .value
+    .trim();
 
 
 
 
 
-if(amount <= 0){
 
-showMessage(
-"Enter a valid amount",
-"error"
-);
 
-return;
+    if(
+        !recipient ||
+        !amount ||
+        amount <= 0
+    ){
 
-}
+        alert(
+        "Enter valid transfer details."
+        );
 
 
+        return;
 
+    }
 
 
-try{
 
 
 
-/* GET SENDER ACCOUNT */
 
 
-const {data:senderAccount,error:senderError}
-=
-await supabase
-.from("accounts")
-.select("*")
-.eq(
-"user_id",
-user.id
-)
-.single();
+    try{
 
 
 
+        const {
 
-if(senderError){
+            data:userData
 
-throw senderError;
+        } =
+        await supabase.auth.getUser();
 
-}
 
 
 
 
 
-/* CHECK BALANCE */
+        if(!userData.user){
 
 
-if(
-Number(senderAccount.balance)
-<
-amount
-){
+            window.location.href =
+            "login.html";
 
 
-showMessage(
-"Insufficient balance",
-"error"
-);
+            return;
 
 
-return;
+        }
 
-}
 
 
 
 
 
-/* FIND RECEIVER */
+        const user =
+        userData.user;
 
 
-const {data:receiverAccount,error:receiverError}
-=
-await supabase
-.from("accounts")
-.select("*")
-.eq(
-"account_number",
-recipientAccount
-)
-.single();
 
 
 
 
 
-if(receiverError || !receiverAccount){
 
+        /*
+            Find sender account
+        */
 
-showMessage(
-"Recipient account not found",
-"error"
-);
 
+        const {
 
-return;
+            data:senderAccount,
 
-}
+            error:senderError
 
+        } =
+        await supabase
 
+        .from("accounts")
 
+        .select("*")
 
+        .eq(
 
-if(
-receiverAccount.account_id
-===
-senderAccount.account_id
-){
+            "user_id",
 
+            user.id
 
-showMessage(
-"You cannot transfer to the same account",
-"error"
-);
+        )
 
+        .single();
 
-return;
 
-}
 
 
 
 
 
-/* UPDATE SENDER BALANCE */
+        if(senderError){
 
 
-const newSenderBalance =
-Number(senderAccount.balance)
--
-amount;
+            throw senderError;
 
 
+        }
 
-const {error:updateSenderError}
-=
-await supabase
-.from("accounts")
-.update({
 
-balance:
-newSenderBalance
 
-})
-.eq(
-"account_id",
-senderAccount.account_id
-);
 
 
 
 
-if(updateSenderError){
 
-throw updateSenderError;
+        if(
+            senderAccount.balance < amount
+        ){
 
-}
+            alert(
+            "Insufficient balance."
+            );
 
 
+            return;
 
 
+        }
 
-/* UPDATE RECEIVER BALANCE */
 
 
-const newReceiverBalance =
-Number(receiverAccount.balance)
-+
-amount;
 
 
 
-const {error:updateReceiverError}
-=
-await supabase
-.from("accounts")
-.update({
 
-balance:
-newReceiverBalance
 
-})
-.eq(
-"account_id",
-receiverAccount.account_id
-);
 
+        /*
+            Find recipient account
+        */
 
 
+        const {
 
+            data:receiverAccount,
 
-if(updateReceiverError){
+            error:receiverError
 
-throw updateReceiverError;
+        } =
+        await supabase
 
-}
+        .from("accounts")
 
+        .select("*")
 
+        .eq(
 
+            "account_number",
 
+            recipient
 
+        )
 
-/* CREATE TRANSACTION */
+        .single();
 
 
-const {error:transactionError}
-=
-await supabase
-.from("transactions")
-.insert([
 
-{
 
 
-account_id:
-senderAccount.account_id,
 
 
-transaction_type:
-"Transfer",
 
+        if(receiverError || !receiverAccount){
 
-description:
-description ||
-"Money Transfer",
 
+            alert(
+            "Recipient account not found."
+            );
 
-amount:
-amount,
 
+            return;
 
-status:
-"Completed",
 
+        }
 
-transaction_date:
-new Date()
 
 
-},
 
 
-{
 
 
-account_id:
-receiverAccount.account_id,
 
 
-transaction_type:
-"Deposit",
+        /*
+            Update sender balance
+        */
 
 
-description:
-"Transfer Received",
+        await supabase
 
+        .from("accounts")
 
-amount:
-amount,
+        .update({
 
+            balance:
 
-status:
-"Completed",
+            senderAccount.balance
+            -
+            amount
 
+        })
 
-transaction_date:
-new Date()
+        .eq(
 
+            "account_id",
 
-}
+            senderAccount.account_id
 
+        );
 
-]);
 
 
 
 
 
 
-if(transactionError){
 
-throw transactionError;
 
-}
+        /*
+            Update receiver balance
+        */
 
 
+        await supabase
 
+        .from("accounts")
 
+        .update({
 
+            balance:
 
-showMessage(
-"Transfer successful!",
-"success"
-);
+            receiverAccount.balance
+            +
+            amount
 
+        })
 
+        .eq(
 
+            "account_id",
 
+            receiverAccount.account_id
 
-form.reset();
+        );
 
 
 
 
 
-}
 
-catch(error){
 
 
-console.error(error);
 
+        /*
+            Sender transaction
+        */
 
-showMessage(
-error.message,
-"error"
-);
 
+        await supabase
 
-}
+        .from("transactions")
 
+        .insert({
+
+            account_id:
+            senderAccount.account_id,
+
+            transaction_type:
+            "Transfer",
+
+            description:
+            description ||
+            "Money transfer",
+
+            amount:
+            amount,
+
+            status:
+            "Completed"
+
+
+        });
+
+
+
+
+
+
+
+
+
+        /*
+            Receiver transaction
+        */
+
+
+        await supabase
+
+        .from("transactions")
+
+        .insert({
+
+            account_id:
+            receiverAccount.account_id,
+
+            transaction_type:
+            "Deposit",
+
+            description:
+            "Transfer received",
+
+            amount:
+            amount,
+
+            status:
+            "Completed"
+
+
+        });
+
+
+
+
+
+
+
+        alert(
+        "Transfer completed successfully."
+        );
+
+
+
+
+
+
+        window.location.href =
+        "dashboard.html";
+
+
+
+
+
+    }
+
+    catch(error){
+
+
+        console.error(error);
+
+
+        alert(
+        error.message
+        );
+
+
+    }
 
 
 
 });
 
 
+
 });
-
-
-
-
-
-
-/* ===============================
-   MESSAGE DISPLAY
-================================ */
-
-
-function showMessage(
-text,
-type
-){
-
-
-const message =
-document.getElementById(
-"message"
-);
-
-
-
-message.textContent =
-text;
-
-
-
-message.className =
-type === "success"
-?
-"success-message"
-:
-"error-message";
-
-}
-
-
-
-
-
-/* ===============================
-   LOGOUT
-================================ */
-
-
-async function logout(){
-
-
-await supabase.auth.signOut();
-
-
-localStorage.removeItem(
-"user"
-);
-
-
-window.location.href =
-"login.html";
-
-
-}

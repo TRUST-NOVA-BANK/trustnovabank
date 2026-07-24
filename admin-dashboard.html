@@ -27,14 +27,15 @@ TrustNova Bank | Admin Dashboard
 <header class="admin-header">
 
 
+
 <div class="admin-logo">
 
 
-<img src="images/logo.png">
+<img src="images/logo.png" alt="TrustNova Bank">
 
 
 <h2>
-TrustNova Bank
+TrustNova Bank Admin
 </h2>
 
 
@@ -43,18 +44,32 @@ TrustNova Bank
 
 
 
-<div class="admin-user">
+
+<div class="admin-links">
 
 
-<span id="admin_name">
-Admin
-</span>
+<a href="admin-users.html">
+Customers
+</a>
+
+
+
+<a href="admin-accounts.html">
+Accounts
+</a>
+
+
+
+<a href="admin-transactions.html">
+Transactions
+</a>
 
 
 
 <a href="#" onclick="logout()">
 Logout
 </a>
+
 
 
 </div>
@@ -69,11 +84,13 @@ Logout
 
 
 
+
+
 <section class="admin-dashboard">
 
 
 
-<div class="welcome">
+<div class="page-title">
 
 
 <h1>
@@ -82,7 +99,7 @@ Admin Dashboard
 
 
 <p>
-Bank management overview
+Monitor TrustNova Bank operations.
 </p>
 
 
@@ -94,38 +111,23 @@ Bank management overview
 
 
 
-<div class="stats-grid">
+
+
+<div class="dashboard-grid">
 
 
 
-<div class="stat-card">
+<div class="dashboard-card">
 
-<h3>
-Customers
-</h3>
 
-<h1 id="total_users">
+<h2>
+Total Customers
+</h2>
+
+
+<p id="totalCustomers">
 0
-</h1>
-
-</div>
-
-
-
-
-
-
-<div class="stat-card">
-
-
-<h3>
-Accounts
-</h3>
-
-
-<h1 id="total_accounts">
-0
-</h1>
+</p>
 
 
 </div>
@@ -136,17 +138,18 @@ Accounts
 
 
 
-<div class="stat-card">
+
+<div class="dashboard-card">
 
 
-<h3>
-Transactions
-</h3>
+<h2>
+Total Accounts
+</h2>
 
 
-<h1 id="total_transactions">
+<p id="totalAccounts">
 0
-</h1>
+</p>
 
 
 </div>
@@ -157,17 +160,18 @@ Transactions
 
 
 
-<div class="stat-card">
+
+<div class="dashboard-card">
 
 
-<h3>
-Total Volume
-</h3>
+<h2>
+Total Balance
+</h2>
 
 
-<h1 id="total_volume">
+<p id="totalBalance">
 $0.00
-</h1>
+</p>
 
 
 </div>
@@ -175,7 +179,29 @@ $0.00
 
 
 
+
+
+
+
+<div class="dashboard-card">
+
+
+<h2>
+Transactions
+</h2>
+
+
+<p id="totalTransactions">
+0
+</p>
+
+
 </div>
+
+
+
+</div>
+
 
 
 
@@ -190,35 +216,29 @@ $0.00
 
 <a href="admin-users.html">
 
-Manage Users
+Manage Customers
 
 </a>
-
-
-
-
-
-<a href="admin-transactions.html">
-
-Transactions
-
-</a>
-
-
 
 
 
 <a href="admin-accounts.html">
 
-Accounts
+Manage Accounts
 
 </a>
 
 
 
+<a href="admin-transactions.html">
+
+Monitor Transactions
+
+</a>
+
+
 
 </div>
-
 
 
 

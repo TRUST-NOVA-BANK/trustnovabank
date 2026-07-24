@@ -3,12 +3,12 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Accounts - TrustNova Bank</title>
+    <title>Manage Accounts - TrustNova Bank</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -16,56 +16,62 @@
 
 <section class="dashboard">
 
-<div class="dashboard-header">
+    <div class="dashboard-header">
 
-<h1>Manage Bank Accounts</h1>
+        <h1>Manage Bank Accounts</h1>
 
-<button onclick="window.location.href='admin-dashboard.html'">
-← Back to Dashboard
-</button>
+        <button onclick="window.location.href='admin-dashboard.html'">
+            ← Back to Dashboard
+        </button>
 
-</div>
+    </div>
 
 
-<div class="recent">
+    <div class="recent">
 
-<input
-type="text"
-id="searchAccount"
-placeholder="Search by Account Number or User ID..."
-onkeyup="searchAccounts()">
+        <input
+            type="text"
+            id="searchAccount"
+            placeholder="Search by Account Number or User ID..."
+            onkeyup="searchAccounts()">
 
-<br><br>
+        <br><br>
 
-<table>
+        <table>
 
-<thead>
+            <thead>
 
-<tr>
+                <tr>
 
-<th>Account ID</th>
-<th>User ID</th>
-<th>Account Number</th>
-<th>Account Type</th>
-<th>Balance</th>
-<th>Status</th>
-<th>Action</th>
+                    <th>Account ID</th>
+                    <th>User ID</th>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                    <th>Action</th>
 
-</tr>
+                </tr>
 
-</thead>
+            </thead>
 
-<tbody id="accountsTable">
+            <tbody id="accountsTable">
 
-</tbody>
+            </tbody>
 
-</table>
+        </table>
 
-</div>
+    </div>
 
 </section>
 
+<!-- Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Supabase Configuration -->
+<script src="supabase.js"></script>
+
+<!-- Accounts JavaScript -->
 <script src="admin-accounts.js"></script>
 
 </body>

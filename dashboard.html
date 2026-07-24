@@ -3,140 +3,375 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>User Dashboard - TrustNova Bank</title>
+<title>Dashboard | TrustNova Bank</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
+
 <body>
-<script>
 
-const user =
-JSON.parse(localStorage.getItem("user"));
 
-if(!user){
+<header class="bank-header">
 
-    window.location.href="index.html";
 
-}
+<div class="bank-logo">
 
-</script>
-    
-<header class="header">
+<img src="images/logo.png" alt="TrustNova Bank">
 
-    <img src="images/logo.png" class="login-logo" alt="TrustNova Bank Logo">
+<div>
 
-    <h1>TrustNova Bank</h1>
+<h2>TrustNova Bank</h2>
 
-<a href="#" onclick="logout()">Logout</a>
+<span>Secure • Reliable • Modern Banking</span>
 
-    
+</div>
+
+</div>
+
+
+
+<div class="header-actions">
+
+
+<button class="notification-btn">
+
+<i class="fa-solid fa-bell"></i>
+
+</button>
+
+
+<div class="user-menu">
+
+<img id="header_photo"
+src="images/default-user.png"
+alt="User">
+
+
+<span id="header_name">
+Customer
+</span>
+
+</div>
+
+
+
+<a href="#" onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+
+</div>
+
 
 </header>
 
 
-<section class="dashboard">
 
-    <!-- Profile Card -->
-    <div class="profile-card">
 
-        <img id="user_photo"
-             src="images/default-user.png"
-             alt="Profile Photo">
 
-        <h2 id="user_name">
-            Loading...
-        </h2>
+<main class="dashboard-container">
 
-        <p id="user_email"></p>
 
-        <p id="user_nationality"></p>
 
-        <p id="user_status"></p>
+<section class="welcome-card">
 
-    </div>
 
-    <!-- Balance Card -->
-    <div class="balance-card">
+<h1>
+Good Morning, <span id="user_name">Customer</span>
+</h1>
 
-        <!-- Your balance content goes here -->
 
-    </div>
+<p id="current_date">
+
+Loading date...
+
+</p>
+
 
 </section>
 
 
-<div class="actions">
 
-    <a href="transfer.html">
-        Transfer Money
-    </a>
 
-    <a href="transactions.html">
-        Transactions
-    </a>
 
-    <a href="profile.html">
-        Profile
-    </a>
+
+<section class="account-summary">
+
+
+
+<div class="balance-card">
+
+
+<h3>
+Available Balance
+</h3>
+
+
+<h1 id="account_balance">
+
+$0.00
+
+</h1>
+
+
+<p>
+Checking Account
+</p>
+
+
+<strong id="account_number">
+
+**** **** **** 4589
+
+</strong>
+
+
+<div class="account-status">
+
+Status:
+
+<span id="account_status">
+Active
+</span>
+
+
+</div>
+
 
 </div>
 
 
-<div class="card">
 
-    <h2>Recent Transactions</h2>
+</section>
 
-    <table>
 
-        <thead>
 
-            <tr>
 
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Status</th>
 
-            </tr>
 
-        </thead>
 
-        <tbody id="transactionList">
 
-            <tr>
+<section class="quick-actions">
 
-                <td colspan="3">
-                    No transactions yet
-                </td>
 
-            </tr>
+<h2>
+Quick Banking
+</h2>
 
-        </tbody>
 
-    </table>
+
+<div class="action-grid">
+
+
+<a href="transfer.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<span>
+Transfer
+</span>
+
+</a>
+
+
+
+
+<a href="transactions.html">
+
+<i class="fa-solid fa-receipt"></i>
+
+<span>
+Transactions
+</span>
+
+</a>
+
+
+
+
+<a href="cards.html">
+
+<i class="fa-solid fa-credit-card"></i>
+
+<span>
+Cards
+</span>
+
+</a>
+
+
+
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>
+Profile
+</span>
+
+</a>
+
+
 
 </div>
 
-<!-- Supabase Library -->
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="transactions-section">
+
+
+<div class="section-title">
+
+<h2>
+Recent Transactions
+</h2>
+
+
+<a href="transactions.html">
+View All
+</a>
+
+
+</div>
+
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Description</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="transactionList">
+
+
+<tr>
+
+<td colspan="4">
+
+Loading transactions...
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="notification-section">
+
+
+<h2>
+Notifications
+</h2>
+
+
+<div id="notifications">
+
+
+<p>
+<i class="fa-solid fa-circle-check"></i>
+Welcome to TrustNova Bank
+</p>
+
+
+<p>
+<i class="fa-solid fa-shield"></i>
+Your account is protected
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<p>
+© 2026 TrustNova Bank. All Rights Reserved.
+</p>
+
+
+</footer>
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Supabase Configuration -->
-<script src="supabase.js"></script>
-
-<!-- Dashboard Logic -->
-<script src="dashboard.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="supabase.js"></script>
 
 <script src="dashboard.js"></script>
 
-    
+
 </body>
 
 </html>

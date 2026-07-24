@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transactions - TrustNova Bank</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-header">
+
+<h1>Transaction Management</h1>
+
+<button onclick="window.location.href='admin-dashboard.html'">
+← Back to Dashboard
+</button>
+
+</div>
+
+<div class="recent">
+
+<input
+type="text"
+id="searchTransaction"
+placeholder="Search by Transaction ID, Account ID or Type..."
+onkeyup="searchTransactions()">
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Transaction ID</th>
+<th>Account ID</th>
+<th>Type</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="transactionsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="admin-transactions.js"></script>
+
+</body>
+
+</html>

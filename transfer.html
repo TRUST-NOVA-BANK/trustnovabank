@@ -4,33 +4,48 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Transfer Money | TrustNova Bank</title>
 
-<link rel="stylesheet" href="transfer.css">
+<title>
+Transfer Money | TrustNova Bank
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
+
 
 
 <body>
 
 
-<header class="bank-header">
+
+<header class="dashboard-header">
 
 
-<div class="bank-logo">
+<div class="dashboard-logo">
 
-<img src="images/logo.png">
+
+<img src="images/logo.png" alt="TrustNova Bank">
+
 
 <h2>
 TrustNova Bank
 </h2>
 
+
 </div>
 
 
-<div>
+
+
+
+<div class="dashboard-user">
+
 
 <a href="dashboard.html">
 Dashboard
@@ -41,6 +56,7 @@ Dashboard
 Logout
 </a>
 
+
 </div>
 
 
@@ -50,10 +66,27 @@ Logout
 
 
 
+
+
+
 <section class="transfer-page">
 
 
+
 <div class="transfer-box">
+
+
+
+<img
+
+src="images/logo.png"
+
+class="profile-logo"
+
+alt="TrustNova Bank"
+
+>
+
 
 
 <h1>
@@ -61,9 +94,13 @@ Transfer Money
 </h1>
 
 
+
 <p>
-Send money securely from your TrustNova account.
+Send USD securely to another TrustNova Bank account.
 </p>
+
+
+
 
 
 
@@ -72,16 +109,28 @@ Send money securely from your TrustNova account.
 
 
 
+
+
 <label>
 Recipient Account Number
 </label>
 
 
-<input 
+
+<input
+
 type="text"
-id="recipient_account"
+
+id="recipient"
+
 placeholder="Enter account number"
-required>
+
+required
+
+>
+
+
+
 
 
 
@@ -91,12 +140,26 @@ Amount (USD)
 </label>
 
 
-<input 
+
+<input
+
 type="number"
+
 id="amount"
+
 placeholder="0.00"
+
+min="1"
+
 step="0.01"
-required>
+
+required
+
+>
+
+
+
+
 
 
 
@@ -106,10 +169,19 @@ Description
 </label>
 
 
+
 <textarea
+
 id="description"
-placeholder="Payment description">
-</textarea>
+
+placeholder="Payment description"
+
+rows="4"
+
+></textarea>
+
+
+
 
 
 
@@ -117,9 +189,12 @@ placeholder="Payment description">
 
 <button type="submit">
 
-Send Transfer
+Send Money
 
 </button>
+
+
+
 
 
 
@@ -129,7 +204,16 @@ Send Transfer
 
 
 
-<div id="message"></div>
+
+
+<div class="secure-message">
+
+
+🔒 Your transfer is protected by TrustNova Bank security.
+
+
+</div>
+
 
 
 
@@ -137,7 +221,11 @@ Send Transfer
 </div>
 
 
+
 </section>
+
+
+
 
 
 
@@ -148,7 +236,10 @@ Send Transfer
 
 <script src="supabase.js"></script>
 
+<script src="auth-check.js"></script>
+
 <script src="transfer.js"></script>
+
 
 
 </body>

@@ -3,37 +3,36 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard - TrustNova Bank</title>
+    <title>User Dashboard - TrustNova Bank</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <header class="header">
 
-<img src="images/logo.png" class="login-logo">
+    <img src="images/logo.png" class="login-logo" alt="TrustNova Bank Logo">
 
-<h1>TrustNova Bank</h1>
+    <h1>TrustNova Bank</h1>
 
-<a href="login.html">Logout</a>
+    <a href="login.html">Logout</a>
 
 </header>
 
 
-
 <section class="dashboard">
 
-    <!-- Add profile card here -->
+    <!-- Profile Card -->
     <div class="profile-card">
 
-        <img id="user_photo" src="images/default-user.png">
+        <img id="user_photo"
+             src="images/default-user.png"
+             alt="Profile Photo">
 
         <h2 id="user_name">
             Loading...
@@ -47,10 +46,11 @@
 
     </div>
 
-
-    <!-- Your existing dashboard content -->
+    <!-- Balance Card -->
     <div class="balance-card">
-        ...
+
+        <!-- Your balance content goes here -->
+
     </div>
 
 </section>
@@ -58,81 +58,63 @@
 
 <div class="actions">
 
+    <a href="transfer.html">
+        Transfer Money
+    </a>
 
-<a href="transfer.html">
-Transfer Money
-</a>
+    <a href="transactions.html">
+        Transactions
+    </a>
 
-
-<a href="transactions.html">
-Transactions
-</a>
-
-
-<a href="profile.html">
-Profile
-</a>
-
+    <a href="profile.html">
+        Profile
+    </a>
 
 </div>
-
-
 
 
 <div class="card">
 
+    <h2>Recent Transactions</h2>
 
-<h2>
-Recent Transactions
-</h2>
+    <table>
 
+        <thead>
 
-<table>
+            <tr>
 
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Status</th>
 
-<thead>
+            </tr>
 
-<tr>
+        </thead>
 
-<th>Description</th>
+        <tbody id="transactionList">
 
-<th>Amount</th>
+            <tr>
 
-<th>Status</th>
+                <td colspan="3">
+                    No transactions yet
+                </td>
 
-</tr>
+            </tr>
 
-</thead>
+        </tbody>
 
-
-<tbody id="transactionList">
-
-
-<tr>
-
-<td colspan="3">
-No transactions yet
-</td>
-
-</tr>
-
-
-</tbody>
-
-
-</table>
-
+    </table>
 
 </div>
 
-
-</section>
-
-
-
+<!-- Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="dashboard.js"></script>
 
+<!-- Supabase Configuration -->
+<script src="supabase.js"></script>
+
+<!-- Dashboard Logic -->
+<script src="dashboard.js"></script>
 
 </body>
 

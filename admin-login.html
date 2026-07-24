@@ -1,42 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login - TrustNova Bank</title>
+
 <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
 
 
 <section class="login-page">
 
+
 <div class="login-box">
 
+
 <img src="images/logo.png" class="login-logo">
+
 
 <h1>Admin Login</h1>
 
 <p>Login to TrustNova Bank Admin Panel</p>
 
 
+
 <form id="adminLoginForm">
 
-<input 
-id="admin_email"
-type="email"
-placeholder="Admin Email"
-required>
+
+
+<div class="input-group">
+
+<label>Email Address</label>
 
 <input 
-id="admin_password"
-type="password"
-placeholder="Password"
+type="email"
+id="admin_email"
+placeholder="Enter admin email"
 required>
+
+</div>
+
+
+
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input 
+type="password"
+id="admin_password"
+placeholder="Enter admin password"
+required>
+
+</div>
+
+
+
 
 <button type="submit">
+
 Admin Login
+
 </button>
 
+
+
 </form>
-  
+
+
+
+
+<div class="register-link">
+
+<a href="index.html">
+Back to Home
+</a>
+
 </div>
+
+
+
+</div>
+
 
 </section>
 
 
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
+
 <script src="admin-auth.js"></script>
+
+
+
+</body>
+
+</html>

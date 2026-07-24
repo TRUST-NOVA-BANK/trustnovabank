@@ -1,0 +1,376 @@
+/* =====================================
+   TRUSTNOVA BANK
+   ADMIN DASHBOARD CSS
+===================================== */
+
+
+:root{
+
+    --green:#00843D;
+    --navy:#003B5C;
+    --gold:#FFC72C;
+    --light:#F4F7FA;
+    --white:#FFFFFF;
+
+}
+
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',Arial,sans-serif;
+
+}
+
+
+
+body{
+
+    background:var(--light);
+
+    color:#1F2937;
+
+}
+
+
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+
+
+
+/* ================= HEADER ================= */
+
+
+.admin-header{
+
+
+    background:white;
+
+    padding:18px 7%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.admin-logo{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+
+}
+
+
+
+.admin-logo img{
+
+    width:60px;
+
+}
+
+
+
+.admin-logo h2{
+
+    color:var(--navy);
+
+}
+
+
+
+
+.admin-user{
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:center;
+
+}
+
+
+
+.admin-user span{
+
+    font-weight:600;
+
+    color:var(--navy);
+
+}
+
+
+
+.admin-user a{
+
+    color:var(--green);
+
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ================= DASHBOARD ================= */
+
+
+.admin-dashboard{
+
+    padding:50px 7%;
+
+}
+
+
+
+
+
+.welcome{
+
+    margin-bottom:35px;
+
+}
+
+
+
+.welcome h1{
+
+    color:var(--navy);
+
+    font-size:38px;
+
+}
+
+
+
+.welcome p{
+
+    color:#666;
+
+    margin-top:8px;
+
+}
+
+
+
+
+
+/* ================= STAT CARDS ================= */
+
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+
+
+
+
+.stat-card{
+
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+
+}
+
+
+
+.stat-card:hover{
+
+
+    transform:translateY(-8px);
+
+
+}
+
+
+
+.stat-card h3{
+
+
+    color:#666;
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.stat-card h1{
+
+
+    color:var(--green);
+
+    font-size:36px;
+
+
+}
+
+
+
+
+
+/* ================= ADMIN ACTIONS ================= */
+
+
+.admin-actions{
+
+
+    margin-top:50px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+
+
+}
+
+
+
+.admin-actions a{
+
+
+    background:var(--navy);
+
+    color:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+
+}
+
+
+
+.admin-actions a:hover{
+
+
+    background:var(--green);
+
+    transform:translateY(-5px);
+
+
+}
+
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:900px){
+
+
+.stats-grid{
+
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+
+}
+
+
+
+.admin-actions{
+
+
+    grid-template-columns:
+    1fr;
+
+
+}
+
+
+.admin-header{
+
+
+    flex-direction:column;
+
+    gap:15px;
+
+
+}
+
+
+}
+
+
+
+@media(max-width:500px){
+
+
+.stats-grid{
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+
+.welcome h1{
+
+    font-size:30px;
+
+}
+
+
+}

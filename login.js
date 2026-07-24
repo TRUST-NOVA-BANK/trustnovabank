@@ -1,76 +1,238 @@
-// TrustNova Bank Login
+/* =====================================
+   TRUSTNOVA BANK
+   LOGIN SYSTEM
+===================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.getElementById("loginForm");
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
-    form.addEventListener("submit", async function (e) {
 
-        e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
+const loginForm =
+document.getElementById(
+"loginForm"
+);
 
-        const password = document.getElementById("password").value;
 
-        const remember =
-            document.querySelector(".remember input[type='checkbox']").checked;
 
-        // Search user
-        const { data: user, error } = await supabase
-            .from("users")
-            .select("*")
-            .eq("email", email)
-            .eq("password_hash", password)
-            .single();
+if(!loginForm){
 
-        if (error || !user) {
+    return;
 
-            alert("Invalid email or password.");
+}
 
-            console.log(error);
 
-            return;
 
-        }
 
-        // Check account status
-        if (user.status !== "Active") {
 
-            alert("Your account is inactive. Please contact support.");
+loginForm.addEventListener(
+"submit",
+async function(e){
 
-            return;
 
-        }
+    e.preventDefault();
 
-        // Save logged-in user
-        localStorage.setItem("user", JSON.stringify(user));
 
-        // Remember Me
-        if (remember) {
 
-            localStorage.setItem("rememberEmail", email);
 
-        } else {
+    const email =
+    document
+    .getElementById("email")
+    .value
+    .trim();
 
-            localStorage.removeItem("rememberEmail");
 
-        }
 
-        alert("Login Successful!");
 
-        window.location.href = "dashboard.html";
+    const password =
+    document
+    .getElementById("password")
+    .value;
 
-    });
 
-    // Auto-fill remembered email
-    const rememberedEmail = localStorage.getItem("rememberEmail");
 
-    if (rememberedEmail) {
 
-        document.getElementById("email").value = rememberedEmail;
 
-        document.querySelector(".remember input[type='checkbox']").checked = true;
+    if(!email || !password){
+
+
+        alert(
+        "Please enter email and password"
+        );
+
+
+        return;
+
 
     }
+
+
+
+
+
+
+
+    try{
+
+
+
+        /*
+            Login with Supabase Auth
+        */
+
+
+        const {
+
+            data,
+
+            error
+
+        } =
+        await supabase.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+
+
+
+
+
+        if(error){
+
+
+            alert(
+            error.message
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+        /*
+            Save user session
+        */
+
+
+        localStorage.setItem(
+
+            "user",
+
+            JSON.stringify(
+                data.user
+            )
+
+        );
+
+
+
+
+
+
+
+
+        /*
+            Check if user is admin
+        */
+
+
+        const {
+
+            data:admin
+
+        } =
+        await supabase
+
+        .from("admins")
+
+        .select("*")
+
+        .eq(
+
+            "user_id",
+
+            data.user.id
+
+        )
+
+        .single();
+
+
+
+
+
+
+
+        if(admin){
+
+
+            localStorage.setItem(
+
+                "admin",
+
+                JSON.stringify(
+                    admin
+                )
+
+            );
+
+
+
+            window.location.href =
+            "admin-dashboard.html";
+
+
+
+        }
+
+        else{
+
+
+
+            window.location.href =
+            "dashboard.html";
+
+
+
+        }
+
+
+
+
+
+    }
+
+    catch(error){
+
+
+        console.error(error);
+
+
+        alert(
+        "Login failed. Please try again."
+        );
+
+
+    }
+
+
+
+});
+
+
 
 });

@@ -4,79 +4,66 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard | TrustNova Bank</title>
 
-<link rel="stylesheet" href="dashboard.css">
-  
+<title>
+TrustNova Bank Dashboard
+</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="supabase.js"></script>
+<link rel="stylesheet" href="style.css">
 
-<script src="auth-check.js"></script>
 
-<script src="dashboard.js"></script>
-
-  
 </head>
+
 
 
 <body>
 
 
-<header class="bank-header">
+
+<header class="dashboard-header">
 
 
-<div class="bank-logo">
+<div class="dashboard-logo">
+
 
 <img src="images/logo.png" alt="TrustNova Bank">
 
-<div>
 
-<h2>TrustNova Bank</h2>
+<h2>
+TrustNova Bank
+</h2>
 
-<span>Secure • Reliable • Modern Banking</span>
 
 </div>
 
-</div>
 
 
 
-<div class="header-actions">
+
+<div class="dashboard-user">
 
 
-<button class="notification-btn">
-
-<i class="fa-solid fa-bell"></i>
-
-</button>
+<a href="dashboard.html">
+Dashboard
+</a>
 
 
-<div class="user-menu">
-
-<img id="header_photo"
-src="images/default-user.png"
-alt="User">
+<a href="profile.html">
+Profile
+</a>
 
 
-<span id="header_name">
-Customer
-</span>
-
-</div>
-
+<a href="transfer.html">
+Transfer
+</a>
 
 
 <a href="#" onclick="logout()">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
 Logout
-
 </a>
 
 
@@ -89,80 +76,108 @@ Logout
 
 
 
-<main class="dashboard-container">
 
 
 
-<section class="welcome-card">
+
+<section class="dashboard">
 
 
-<h1>
-Good Morning, <span id="user_name">Customer</span>
-</h1>
 
 
-<p id="current_date">
 
-Loading date...
+
+<!-- Customer Profile -->
+
+<div class="profile-card">
+
+
+<img
+
+id="user_photo"
+
+src="images/default-user.png"
+
+alt="Profile Photo"
+
+>
+
+
+<h2 id="user_name">
+
+Loading...
+
+</h2>
+
+
+
+<p id="user_email">
 
 </p>
 
 
-</section>
+
+<p id="user_status">
+
+</p>
+
+
+</div>
 
 
 
 
 
 
-<section class="account-summary">
 
+
+
+<!-- Account Balance -->
 
 
 <div class="balance-card">
 
 
-<h3>
+<p>
 Available Balance
-</h3>
+</p>
 
 
-<h1 id="account_balance">
+<h1 id="balance">
 
 $0.00
 
 </h1>
 
 
+
 <p>
-Checking Account
+Account Number:
+<span id="account_number">
+
+Loading...
+
+</span>
+
 </p>
 
 
-<strong id="account_number">
 
-**** **** **** 4589
+<p>
+Account Type:
+<span id="account_type">
 
-</strong>
+Loading...
 
-
-<div class="account-status">
-
-Status:
-
-<span id="account_status">
-Active
 </span>
 
+</p>
+
+
 
 </div>
 
 
-</div>
-
-
-
-</section>
 
 
 
@@ -170,12 +185,14 @@ Active
 
 
 
+<!-- Quick Actions -->
 
-<section class="quick-actions">
+
+<div class="quick-actions">
 
 
 <h2>
-Quick Banking
+Quick Actions
 </h2>
 
 
@@ -185,50 +202,54 @@ Quick Banking
 
 <a href="transfer.html">
 
-<i class="fa-solid fa-money-bill-transfer"></i>
+💸
 
-<span>
-Transfer
-</span>
+<br>
+
+Transfer Money
 
 </a>
+
 
 
 
 
 <a href="transactions.html">
 
-<i class="fa-solid fa-receipt"></i>
+📄
 
-<span>
+<br>
+
 Transactions
-</span>
 
 </a>
 
 
-
-
-<a href="cards.html">
-
-<i class="fa-solid fa-credit-card"></i>
-
-<span>
-Cards
-</span>
-
-</a>
 
 
 
 
 <a href="profile.html">
 
-<i class="fa-solid fa-user"></i>
+👤
 
-<span>
+<br>
+
 Profile
-</span>
+
+</a>
+
+
+
+
+
+<a href="#">
+
+🏦
+
+<br>
+
+Accounts
 
 </a>
 
@@ -237,7 +258,7 @@ Profile
 </div>
 
 
-</section>
+</div>
 
 
 
@@ -247,22 +268,17 @@ Profile
 
 
 
-<section class="transactions-section">
+<!-- Recent Transactions -->
 
 
-<div class="section-title">
+<div class="recent">
+
+
 
 <h2>
 Recent Transactions
 </h2>
 
-
-<a href="transactions.html">
-View All
-</a>
-
-
-</div>
 
 
 
@@ -272,19 +288,30 @@ View All
 
 <thead>
 
+
 <tr>
 
-<th>Date</th>
 
-<th>Description</th>
+<th>
+Description
+</th>
 
-<th>Amount</th>
 
-<th>Status</th>
+<th>
+Amount
+</th>
+
+
+<th>
+Status
+</th>
+
 
 </tr>
 
+
 </thead>
+
 
 
 
@@ -293,11 +320,13 @@ View All
 
 <tr>
 
-<td colspan="4">
+
+<td colspan="3">
 
 Loading transactions...
 
 </td>
+
 
 </tr>
 
@@ -305,68 +334,22 @@ Loading transactions...
 </tbody>
 
 
+
 </table>
 
-
-</section>
-
-
-
-
-
-
-
-
-
-
-<section class="notification-section">
-
-
-<h2>
-Notifications
-</h2>
-
-
-<div id="notifications">
-
-
-<p>
-<i class="fa-solid fa-circle-check"></i>
-Welcome to TrustNova Bank
-</p>
-
-
-<p>
-<i class="fa-solid fa-shield"></i>
-Your account is protected
-</p>
 
 
 </div>
 
 
+
+
+
+
+
 </section>
 
 
-
-</main>
-
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-© 2026 TrustNova Bank. All Rights Reserved.
-</p>
-
-
-</footer>
 
 
 
@@ -378,7 +361,10 @@ Your account is protected
 
 <script src="supabase.js"></script>
 
+<script src="auth-check.js"></script>
+
 <script src="dashboard.js"></script>
+
 
 
 </body>

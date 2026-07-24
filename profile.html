@@ -4,34 +4,48 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Profile | TrustNova Bank</title>
 
-<link rel="stylesheet" href="profile.css">
+<title>
+Profile | TrustNova Bank
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
 
 </head>
+
 
 
 <body>
 
 
-<header class="bank-header">
+
+<header class="dashboard-header">
 
 
-<div class="bank-logo">
+<div class="dashboard-logo">
+
 
 <img src="images/logo.png" alt="TrustNova Bank">
+
 
 <h2>
 TrustNova Bank
 </h2>
 
+
 </div>
 
 
 
-<div class="header-links">
+
+
+<div class="dashboard-user">
+
 
 <a href="dashboard.html">
 Dashboard
@@ -54,97 +68,147 @@ Logout
 
 
 
+
+
 <section class="profile-page">
 
 
 
-<div class="profile-card">
+<div class="profile-box">
 
 
-<img 
+
+
+
+<img
+
 id="profile_photo"
+
 src="images/default-user.png"
-class="profile-image"
+
+class="profile-logo"
+
+alt="Profile Photo"
+
 >
 
 
 
-<h1 id="full_name">
 
-Loading...
 
+
+
+<h1>
+Customer Profile
 </h1>
 
 
-<p id="email">
 
+<p>
+Manage your TrustNova Bank information.
 </p>
 
 
 
 
-<div class="profile-details">
+
+
+
+<div class="profile-info">
+
+
 
 
 
 <div>
 
-<strong>
+<label>
+First Name
+</label>
+
+
+<input
+
+id="first_name"
+
+type="text"
+
+>
+
+</div>
+
+
+
+
+
+
+<div>
+
+<label>
+Last Name
+</label>
+
+
+<input
+
+id="last_name"
+
+type="text"
+
+>
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+<label>
+Email
+</label>
+
+
+<input
+
+id="email"
+
+type="email"
+
+readonly
+
+>
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+<label>
 Phone
-</strong>
-
-<span id="phone">
-Loading...
-</span>
-
-</div>
+</label>
 
 
+<input
 
+id="phone"
 
-<div>
+type="text"
 
-<strong>
-Account Number
-</strong>
-
-<span id="account_number">
-Loading...
-</span>
+>
 
 </div>
 
 
 
-
-
-<div>
-
-<strong>
-Account Type
-</strong>
-
-<span id="account_type">
-Loading...
-</span>
-
-</div>
-
-
-
-
-
-<div>
-
-<strong>
-Account Status
-</strong>
-
-<span id="account_status">
-Loading...
-</span>
-
-</div>
 
 
 
@@ -156,12 +220,38 @@ Loading...
 
 
 
-<a href="dashboard.html"
-class="back-btn">
 
-← Back To Dashboard
+<button
+
+id="updateProfile"
+
+>
+
+Update Profile
+
+</button>
+
+
+
+
+
+
+
+
+<a
+
+href="dashboard.html"
+
+class="back-home"
+
+>
+
+← Back to Dashboard
 
 </a>
+
+
+
 
 
 
@@ -177,11 +267,16 @@ class="back-btn">
 
 
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase.js"></script>
 
+<script src="auth-check.js"></script>
+
 <script src="profile.js"></script>
+
 
 
 </body>

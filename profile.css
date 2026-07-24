@@ -1,0 +1,312 @@
+/* =====================================
+   TRUSTNOVA BANK
+   PROFILE PAGE CSS
+===================================== */
+
+
+:root{
+
+    --green:#00843D;
+    --navy:#003B5C;
+    --gold:#FFC72C;
+    --light:#F4F7FA;
+    --white:#FFFFFF;
+    --border:#E5E7EB;
+
+}
+
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',Arial,sans-serif;
+
+}
+
+
+
+body{
+
+    background:var(--light);
+
+    color:#1F2937;
+
+}
+
+
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+
+
+/* ================= HEADER ================= */
+
+
+.bank-header{
+
+    background:white;
+
+    padding:18px 7%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.bank-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.bank-logo img{
+
+    width:60px;
+
+}
+
+
+
+.bank-logo h2{
+
+    color:var(--navy);
+
+}
+
+
+
+.header-links a{
+
+    margin-left:20px;
+
+    color:var(--green);
+
+    font-weight:600;
+
+}
+
+
+
+
+
+/* ================= PROFILE PAGE ================= */
+
+
+.profile-page{
+
+    min-height:calc(100vh - 100px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:50px 20px;
+
+}
+
+
+
+
+
+.profile-card{
+
+    background:white;
+
+    width:100%;
+
+    max-width:600px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+}
+
+
+
+
+
+.profile-image{
+
+    width:130px;
+
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid var(--green);
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+.profile-card h1{
+
+    color:var(--navy);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.profile-card p{
+
+    color:#666;
+
+}
+
+
+
+
+
+/* ================= DETAILS ================= */
+
+
+.profile-details{
+
+    margin-top:35px;
+
+    text-align:left;
+
+}
+
+
+
+
+.profile-details div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:18px 10px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+
+.profile-details strong{
+
+    color:var(--navy);
+
+}
+
+
+
+.profile-details span{
+
+    color:#555;
+
+}
+
+
+
+
+
+
+/* ================= BUTTON ================= */
+
+
+.back-btn{
+
+    display:inline-block;
+
+    margin-top:30px;
+
+    background:var(--green);
+
+    color:white;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+.back-btn:hover{
+
+    background:var(--navy);
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+/* ================= MOBILE ================= */
+
+
+@media(max-width:600px){
+
+
+.bank-header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.profile-card{
+
+    padding:25px;
+
+}
+
+
+
+.profile-details div{
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+
+}

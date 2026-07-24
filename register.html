@@ -44,54 +44,7 @@
 <button type="submit">
 Create Account
 </button>
-
-async function registerUser() {
-
-  const first_name = document.getElementById("first_name").value;
-  const last_name = document.getElementById("last_name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const password = document.getElementById("password").value;
-
-  const { data, error } = await supabase
-    .from("users")
-    .insert([
-      {
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-        phone: phone,
-        password_hash: password,
-        status: 1,
-        created_at: new Date()
-      }
-    ]);
-
-  if (error) {
-    alert(error.message);
-  } else {
-    alert("Registration successful!");
-  }
-
-}
-  
-</form>
-
-
-
-<div class="register-link">
-
-Already have an account?
-
-<a href="login.html">
-Login
-</a>
-
-
-</div>
-
-
-</div>
+div>
 
 
 </section>

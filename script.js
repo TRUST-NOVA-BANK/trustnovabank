@@ -117,3 +117,38 @@ if(year){
     `&copy; ${currentYear} TrustNova Bank. All Rights Reserved.`;
 
 }
+
+
+
+
+
+async function registerUser() {
+
+  const full_name = document.getElementById("full_name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabase
+    .from("users")
+    .insert([
+      {
+        full_name: full_name,
+        email: email,
+        phone: phone,
+        password: password
+      }
+    ]);
+
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Registration successful!");
+  }
+
+}
+
+
+
+
+

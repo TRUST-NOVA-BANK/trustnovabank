@@ -1,96 +1,290 @@
-async function loadAdminDashboard() {
-
-    try {
-
-        const { count: usersCount, error: usersError } = await supabase
-            .from("users")
-            .select("*", { count: "exact", head: true });
-
-        if (usersError) throw usersError;
+/* =====================================
+   TRUSTNOVA BANK
+   ADMIN DASHBOARD SYSTEM
+===================================== */
 
 
-        const { count: accountsCount, error: accountsError } = await supabase
-            .from("accounts")
-            .select("*", { count: "exact", head: true });
-
-        if (accountsError) throw accountsError;
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
-        const { count: transactionsCount, error: transactionsError } = await supabase
-            .from("transactions")
-            .select("*", { count: "exact", head: true });
+checkAdmin();
 
-        if (transactionsError) throw transactionsError;
+loadStatistics();
 
-
-        const { count: ticketsCount, error: ticketsError } = await supabase
-            .from("support_tickets")
-            .select("*", { count: "exact", head: true });
-
-        if (ticketsError) throw ticketsError;
-
-
-        document.getElementById("total_users").textContent = usersCount ?? 0;
-        document.getElementById("total_accounts").textContent = accountsCount ?? 0;
-        document.getElementById("total_transactions").textContent = transactionsCount ?? 0;
-        document.getElementById("total_tickets").textContent = ticketsCount ?? 0;
-
-    } catch (error) {
-
-        console.error(error);
-        alert(error.message);
-
-    }
-
-}
-
-
-// Display admin name
-const admin = JSON.parse(localStorage.getItem("admin"));
-
-if (admin) {
-
-    document.querySelector(".dashboard-header p").textContent =
-        "Welcome, " + admin.full_name;
-
-}
-
-
-// Navigation
-function viewUsers() {
-
-    window.location.href = "admin-users.html";
-
-}
-
-function viewAccounts() {
-
-    window.location.href = "admin-accounts.html";
-
-}
-
-function viewTransactions() {
-
-    window.location.href = "admin-transactions.html";
-
-}
-
-
-// Logout
-async function logoutAdmin() {
-
-    localStorage.removeItem("admin");
-
-    await supabase.auth.signOut();
-
-    window.location.href = "admin-login.html";
-
-}
-
-
-// Load dashboard
-document.addEventListener("DOMContentLoaded", function () {
-
-    loadAdminDashboard();
 
 });
+
+
+
+
+
+
+/* ===============================
+   ADMIN CHECK
+================================ */
+
+
+function checkAdmin(){
+
+
+const admin =
+JSON.parse(
+localStorage.getItem("admin")
+);
+
+
+
+if(!admin){
+
+
+window.location.href =
+"login.html";
+
+
+return;
+
+
+}
+
+
+
+const adminName =
+document.getElementById(
+"admin_name"
+);
+
+
+
+if(adminName){
+
+adminName.textContent =
+admin.full_name ||
+"Administrator";
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   LOAD BANK STATISTICS
+================================ */
+
+
+async function loadStatistics(){
+
+
+
+try{
+
+
+
+/* TOTAL USERS */
+
+
+const {count:userCount,error:userError}
+=
+await supabase
+.from("users")
+.select(
+"*",
+{
+count:"exact",
+head:true
+}
+);
+
+
+
+if(userError)
+throw userError;
+
+
+
+
+
+document.getElementById(
+"total_users"
+)
+.textContent =
+userCount || 0;
+
+
+
+
+
+
+
+
+
+/* TOTAL ACCOUNTS */
+
+
+const {count:accountCount,error:accountError}
+=
+await supabase
+.from("accounts")
+.select(
+"*",
+{
+count:"exact",
+head:true
+}
+);
+
+
+
+
+
+if(accountError)
+throw accountError;
+
+
+
+
+
+document.getElementById(
+"total_accounts"
+)
+.textContent =
+accountCount || 0;
+
+
+
+
+
+
+
+
+
+/* TRANSACTIONS */
+
+
+const {data:transactions,error:transactionError}
+=
+await supabase
+.from("transactions")
+.select(
+"amount"
+);
+
+
+
+
+if(transactionError)
+throw transactionError;
+
+
+
+
+
+document.getElementById(
+"total_transactions"
+)
+.textContent =
+transactions.length;
+
+
+
+
+
+
+
+/* TOTAL VOLUME */
+
+
+let totalVolume = 0;
+
+
+
+transactions.forEach(
+(transaction)=>{
+
+
+totalVolume +=
+Number(transaction.amount);
+
+
+});
+
+
+
+
+
+
+const money =
+new Intl.NumberFormat(
+"en-US",
+{
+
+style:"currency",
+
+currency:"USD"
+
+});
+
+
+
+
+
+document.getElementById(
+"total_volume"
+)
+.textContent =
+money.format(
+totalVolume
+);
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.error(
+error.message
+);
+
+
+}
+
+}
+
+
+
+
+
+/* ===============================
+   LOGOUT
+================================ */
+
+
+async function logout(){
+
+
+await supabase.auth.signOut();
+
+
+localStorage.removeItem(
+"admin"
+);
+
+
+
+window.location.href =
+"login.html";
+
+
+}

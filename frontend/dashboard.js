@@ -81,6 +81,49 @@ async function loadDashboard(){
 
 }
 
+async function loadDashboard() {
 
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+
+    const { data, error } = await supabase
+        .from("accounts")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+
+
+    if (error) {
+
+        console.log(error.message);
+
+    } else {
+
+        document.getElementById("balance").innerHTML =
+        data.balance;
+
+        document.getElementById("account_number").innerHTML =
+        data.account_number;
+
+        document.getElementById("account_type").innerHTML =
+        data.account_type;
+
+    }
+
+}
+
+
+async function logoutUser(){
+
+    await supabase.auth.signOut();
+
+    window.location.href = "login.html";
+
+}
 
 loadDashboard();

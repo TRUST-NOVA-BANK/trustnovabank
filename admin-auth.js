@@ -1,15 +1,15 @@
 alert("Admin auth connected");
 
-
 document
 .getElementById("adminLoginForm")
 .addEventListener("submit", async function(e) {
 
     e.preventDefault();
 
-
     const email = document.getElementById("admin_email").value;
     const password = document.getElementById("admin_password").value;
+
+    console.log("Trying login:", email);
 
 
     const { data: admin, error } = await supabase
@@ -20,9 +20,13 @@ document
         .single();
 
 
+    console.log(admin);
+    console.log(error);
+
+
     if (error) {
 
-        alert("Invalid admin login");
+        alert(error.message);
 
     } else {
 

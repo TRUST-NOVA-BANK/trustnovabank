@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Users - TrustNova Bank</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="dashboard">
+
+<div class="dashboard-header">
+<h1>Manage Users</h1>
+
+<button onclick="window.location.href='admin-dashboard.html'">
+← Back to Dashboard
+</button>
+</div>
+
+<div class="recent">
+
+<input
+type="text"
+id="searchUser"
+placeholder="Search by name or email..."
+onkeyup="searchUsers()">
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="usersTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="admin-users.js"></script>
+
+</body>
+</html>

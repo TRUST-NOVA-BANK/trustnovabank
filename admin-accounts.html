@@ -9,7 +9,7 @@
 
 
 <title>
-TrustNova Bank | Manage Accounts
+TrustNova Bank | Account Management
 </title>
 
 
@@ -19,24 +19,30 @@ TrustNova Bank | Manage Accounts
 </head>
 
 
+
 <body>
+
 
 
 <header class="admin-header">
 
 
+
 <div class="admin-logo">
 
 
-<img src="images/logo.png">
+<img src="images/logo.png" alt="TrustNova Bank">
 
 
 <h2>
-TrustNova Bank
+TrustNova Bank Admin
 </h2>
 
 
 </div>
+
+
+
 
 
 
@@ -48,12 +54,23 @@ Dashboard
 </a>
 
 
+<a href="admin-users.html">
+Customers
+</a>
+
+
+<a href="admin-transactions.html">
+Transactions
+</a>
+
+
 <a href="#" onclick="logout()">
 Logout
 </a>
 
 
 </div>
+
 
 
 </header>
@@ -64,7 +81,9 @@ Logout
 
 
 
-<section class="accounts-page">
+
+
+<section class="admin-page">
 
 
 
@@ -72,16 +91,18 @@ Logout
 
 
 <h1>
-Manage Accounts
+Account Management
 </h1>
 
 
 <p>
-Monitor customer banking accounts
+Monitor TrustNova Bank customer accounts and balances.
 </p>
 
 
 </div>
+
+
 
 
 
@@ -98,7 +119,7 @@ type="text"
 
 id="searchAccount"
 
-placeholder="Search account number or user ID..."
+placeholder="Search account number..."
 
 >
 
@@ -111,11 +132,12 @@ placeholder="Search account number or user ID..."
 
 
 
-<div class="accounts-table">
+
+
+<div class="table-box">
 
 
 <table>
-
 
 
 <thead>
@@ -125,17 +147,12 @@ placeholder="Search account number or user ID..."
 
 
 <th>
-Account ID
-</th>
-
-
-<th>
 Account Number
 </th>
 
 
 <th>
-User ID
+Customer
 </th>
 
 
@@ -150,12 +167,12 @@ Balance
 
 
 <th>
-Status
+Currency
 </th>
 
 
 <th>
-Action
+Status
 </th>
 
 
@@ -167,16 +184,19 @@ Action
 
 
 
+
 <tbody id="accountsTable">
 
 
 <tr>
 
-<td colspan="7">
+
+<td colspan="6">
 
 Loading accounts...
 
 </td>
+
 
 </tr>
 
@@ -188,8 +208,8 @@ Loading accounts...
 </table>
 
 
-</div>
 
+</div>
 
 
 
@@ -204,11 +224,14 @@ Loading accounts...
 
 
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase.js"></script>
 
 <script src="admin-accounts.js"></script>
+
 
 
 </body>

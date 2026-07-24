@@ -2,66 +2,76 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manage Users - TrustNova Bank</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Manage Users - TrustNova Bank</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <section class="dashboard">
 
-<div class="dashboard-header">
-<h1>Manage Users</h1>
+    <div class="dashboard-header">
 
-<button onclick="window.location.href='admin-dashboard.html'">
-← Back to Dashboard
-</button>
-</div>
+        <h1>Manage Users</h1>
 
-<div class="recent">
+        <button onclick="window.location.href='admin-dashboard.html'">
+            ← Back to Dashboard
+        </button>
 
-<input
-type="text"
-id="searchUser"
-placeholder="Search by name or email..."
-onkeyup="searchUsers()">
+    </div>
 
-<br><br>
+    <div class="recent">
 
-<table>
+        <input
+            type="text"
+            id="searchUser"
+            placeholder="Search by Name or Email..."
+            onkeyup="searchUsers()">
 
-<thead>
+        <br><br>
 
-<tr>
+        <table>
 
-<th>ID</th>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th>Status</th>
-<th>Action</th>
+            <thead>
 
-</tr>
+                <tr>
 
-</thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
 
-<tbody id="usersTable">
+                </tr>
 
-</tbody>
+            </thead>
 
-</table>
+            <tbody id="usersTable">
 
-</div>
+            </tbody>
+
+        </table>
+
+    </div>
 
 </section>
 
+<!-- Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Supabase Configuration -->
+<script src="supabase.js"></script>
+
+<!-- Users JavaScript -->
 <script src="admin-users.js"></script>
 
 </body>
+
 </html>

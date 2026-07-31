@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TrustNova PayPal Payment</title>
+</head>
+
+<body>
+
+<h2>TrustNova Payment</h2>
+
+<input id="amount" value="10.00" placeholder="Amount">
+
+<select id="currency">
+  <option value="USD">USD</option>
+  <option value="EUR">EUR</option>
+  <option value="GBP">GBP</option>
+</select>
+
+<button onclick="createPayment()">
+  Pay with PayPal
+</button>
+
+<p id="result"></p>
+
+
+<script>
+
+async function createPayment(){
+
+const amount =
+document.getElementById("amount").value;
+
+const currency =
+document.getElementById("currency").value;
+
+
+const response = await fetch(
+"https://uiltkhacgipmjrlgsnvb.supabase.co/functions/v1/smart-function",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+action:"create_order",
+amount:amount,
+currency:currency,
+description:"TrustNova Payment"
+})
+});
+
+
+const data = await response.json();
+
+console.log(data);
+
+
+document.getElementById("result").innerHTML =
+"PayPal Order ID: " + data.id;
+
+}
+
+</script>
+
+</body>
+</html>aaaa

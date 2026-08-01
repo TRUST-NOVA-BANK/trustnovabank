@@ -4,7 +4,8 @@
 ===================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-
+const SUPABASE_URL =
+    "https://uiltkhacgipmjrlgsnvb.supabase.co";
     const form =
         document.getElementById("openAccountForm");
 

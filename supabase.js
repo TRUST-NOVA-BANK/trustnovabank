@@ -10,6 +10,8 @@ const SUPABASE_ANON_KEY =
 "sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
 
 
+
+
 /* =====================================
    CREATE SUPABASE CLIENT
 ===================================== */

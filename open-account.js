@@ -6,6 +6,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 const SUPABASE_URL =
     "https://uiltkhacgipmjrlgsnvb.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
+
+const supabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+   
     const form =
         document.getElementById("openAccountForm");
 

@@ -3,276 +3,157 @@
    SUPABASE CONFIGURATION
 ===================================== */
 
-
-/*
-    Supabase Connection
-
-    Replace the values below:
-
-    SUPABASE_URL:
-    Supabase Dashboard
-    → Project Settings
-    → API
-    → Project URL
-
-
-    SUPABASE_ANON_KEY:
-    Supabase Dashboard
-    → Project Settings
-    → API
-    → anon public key
-
-*/
-
-
-
-const SUPABASE_URL = 
-"https://YOUR_PROJECT_ID.supabase.co";
-
-
+const SUPABASE_URL =
+    "https://uiltkhacgipmjrlgsnvb.supabase.co";
 
 const SUPABASE_ANON_KEY =
-"YOUR_ANON_PUBLIC_KEY";
-
-
-
-
-
+    "sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
 
 
 /* =====================================
    CREATE SUPABASE CLIENT
 ===================================== */
 
-
-const supabase = 
-window.supabase.createClient(
-
-    SUPABASE_URL,
-
-    SUPABASE_ANON_KEY
-
-);
-
-
-
-
-
+const supabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
 
 
 /* =====================================
-   AUTH HELPERS
+   GET CURRENT USER
 ===================================== */
 
-
-
-async function getCurrentUser(){
-
+async function getCurrentUser() {
 
     const {
-
         data,
-
         error
-
     } = await supabase.auth.getUser();
 
-
-
-    if(error){
+    if (error) {
+        console.error(
+            "Unable to get current user:",
+            error
+        );
 
         return null;
-
     }
 
-
-
-    return data.user;
-
-
+    return data.user || null;
 }
 
 
+/* =====================================
+   LOGOUT
+===================================== */
 
-
-
-
-
-async function logout(){
-
+async function logout() {
 
     await supabase.auth.signOut();
 
-
     localStorage.removeItem("user");
-
     localStorage.removeItem("admin");
 
-
     window.location.href =
-    "login.html";
-
-
+        "login.html";
 }
-
-
-
-
-
 
 
 /* =====================================
    SAVE USER SESSION
 ===================================== */
 
-
-
-async function saveUserSession(){
-
+async function saveUserSession() {
 
     const user =
-    await getCurrentUser();
+        await getCurrentUser();
 
-
-
-    if(user){
-
+    if (user) {
 
         localStorage.setItem(
-
             "user",
-
             JSON.stringify(user)
-
         );
 
-
     }
-
-
 }
 
 
-
-
-
 /* =====================================
-   CHECK LOGIN
+   REQUIRE LOGIN
 ===================================== */
 
-
-async function requireLogin(){
-
+async function requireLogin() {
 
     const user =
-    await getCurrentUser();
+        await getCurrentUser();
 
-
-
-    if(!user){
-
+    if (!user) {
 
         window.location.href =
-        "login.html";
-
+            "login.html";
 
         return false;
-
-
     }
-
-
 
     return true;
-
-
 }
 
 
-
-
-
-
-
 /* =====================================
-   CHECK ADMIN
+   REQUIRE ADMIN
 ===================================== */
 
-
-async function requireAdmin(){
-
+async function requireAdmin() {
 
     const user =
-    await getCurrentUser();
+        await getCurrentUser();
 
-
-
-    if(!user){
-
+    if (!user) {
 
         window.location.href =
-        "login.html";
-
+            "login.html";
 
         return false;
-
-
     }
-
-
-
 
 
     const {
-
-        data:admin
-
+        data: admin,
+        error
     } = await supabase
-
-    .from("admins")
-
-    .select("*")
-
-    .eq(
-
-        "user_id",
-
-        user.id
-
-    )
-
-    .single();
+        .from("admins")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
 
 
+    if (error) {
 
-
-
-    if(!admin){
-
-
-        window.location.href =
-        "dashboard.html";
-
+        console.error(
+            "Admin lookup error:",
+            error
+        );
 
         return false;
-
-
     }
 
 
+    if (!admin) {
+
+        window.location.href =
+            "dashboard.html";
+
+        return false;
+    }
 
 
     localStorage.setItem(
-
         "admin",
-
         JSON.stringify(admin)
-
     );
 
-
-
     return true;
-
-
 }

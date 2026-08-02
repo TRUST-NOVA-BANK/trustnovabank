@@ -8,7 +8,7 @@ from dashboard import get_dashboard
 app = Flask(__name__)
 
 
-@app.route("/dashboard/<int:user_id>")
+@app.route("/dashboard/<int:user_id>", methods=["GET"])
 def dashboard(user_id):
     result = get_dashboard(user_id)
     return jsonify(result)
@@ -16,7 +16,7 @@ def dashboard(user_id):
 
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.json
+    data = request.get_json()
 
     result = login_user(
         data["email"],
@@ -28,7 +28,7 @@ def login():
 
 @app.route("/register", methods=["POST"])
 def register():
-    data = request.json
+    data = request.get_json()
 
     result = register_user(
         data["full_name"],

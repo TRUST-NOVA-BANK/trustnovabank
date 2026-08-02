@@ -4,12 +4,10 @@
 ===================================== */
 
 const SUPABASE_URL =
-"https://uiltkhacgipmjrlgsnvb.supabase.co";
+    "https://uiltkhacgipmjrlgsnvb.supabase.co";
 
 const SUPABASE_ANON_KEY =
-"sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
-
-
+    "sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
 
 
 /* =====================================
@@ -17,10 +15,10 @@ const SUPABASE_ANON_KEY =
 ===================================== */
 
 const supabase =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
 
 
 /* =====================================
@@ -35,10 +33,15 @@ async function getCurrentUser() {
     } = await supabase.auth.getUser();
 
     if (error) {
+        console.error(
+            "Get current user error:",
+            error
+        );
+
         return null;
     }
 
-    return data.user;
+    return data.user || null;
 }
 
 
@@ -48,12 +51,21 @@ async function getCurrentUser() {
 
 async function logout() {
 
-    await supabase.auth.signOut();
+    const { error } =
+        await supabase.auth.signOut();
+
+    if (error) {
+        console.error(
+            "Logout error:",
+            error
+        );
+    }
 
     localStorage.removeItem("user");
     localStorage.removeItem("admin");
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 }
 
 
@@ -63,13 +75,16 @@ async function logout() {
 
 async function saveUserSession() {
 
-    const user = await getCurrentUser();
+    const user =
+        await getCurrentUser();
 
     if (user) {
+
         localStorage.setItem(
             "user",
             JSON.stringify(user)
         );
+
     }
 }
 
@@ -80,12 +95,13 @@ async function saveUserSession() {
 
 async function requireLogin() {
 
-    const user = await getCurrentUser();
+    const user =
+        await getCurrentUser();
 
     if (!user) {
 
         window.location.href =
-        "login.html";
+            "login.html";
 
         return false;
     }
@@ -100,12 +116,13 @@ async function requireLogin() {
 
 async function requireAdmin() {
 
-    const user = await getCurrentUser();
+    const user =
+        await getCurrentUser();
 
     if (!user) {
 
         window.location.href =
-        "login.html";
+            "login.html";
 
         return false;
     }
@@ -117,12 +134,25 @@ async function requireAdmin() {
         .from("admins")
         .select("*")
         .eq("user_id", user.id)
-        .single();
+        .maybeSingle();
 
-    if (error || !admin) {
+    if (error) {
+
+        console.error(
+            "Admin lookup error:",
+            error
+        );
 
         window.location.href =
-        "dashboard.html";
+            "dashboard.html";
+
+        return false;
+    }
+
+    if (!admin) {
+
+        window.location.href =
+            "dashboard.html";
 
         return false;
     }

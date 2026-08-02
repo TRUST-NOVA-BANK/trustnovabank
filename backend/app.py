@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, jsonify
+
 from register import register_user
 from login import login_user
 from dashboard import get_dashboard

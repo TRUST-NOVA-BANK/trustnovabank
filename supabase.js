@@ -24,7 +24,7 @@ window.supabase.createClient(
 
 
 /* =====================================
-   AUTH HELPERS
+   GET CURRENT USER
 ===================================== */
 
 async function getCurrentUser() {
@@ -75,7 +75,7 @@ async function saveUserSession() {
 
 
 /* =====================================
-   CHECK LOGIN
+   REQUIRE LOGIN
 ===================================== */
 
 async function requireLogin() {
@@ -95,7 +95,7 @@ async function requireLogin() {
 
 
 /* =====================================
-   CHECK ADMIN
+   REQUIRE ADMIN
 ===================================== */
 
 async function requireAdmin() {

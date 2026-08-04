@@ -230,10 +230,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function generateAccountNumber() {
 
-    return String(
-        Math.floor(
-            Math.random() * 9000000000
-        ) + 1000000000
-    );
+    const min = 1000000000n;
+    const range = 9000000000n; // 10-digit numbers: [1000000000, 9999999999]
+    const maxUint64 = (1n << 64n) - 1n;
+    const limit = maxUint64 - ((maxUint64 + 1n) % range);
+
+    while (true) {
+        const bytes = new Uint8Array(8);
+        window.crypto.getRandomValues(bytes);
+
+        let value = 0n;
+        for (const byte of bytes) {
+            value = (value << 8n) | BigInt(byte);
+        }
+
+        if (value <= limit) {
+            return String(min + (value % range));
+        }
+    }
 
 }

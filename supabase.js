@@ -34,7 +34,7 @@ async function getCurrentUser() {
 
     if (error) {
         console.error(
-            "Unable to get current user:",
+            "Get current user error:",
             error
         );
 
@@ -51,7 +51,15 @@ async function getCurrentUser() {
 
 async function logout() {
 
-    await supabase.auth.signOut();
+    const { error } =
+        await supabase.auth.signOut();
+
+    if (error) {
+        console.error(
+            "Logout error:",
+            error
+        );
+    }
 
     localStorage.removeItem("user");
     localStorage.removeItem("admin");
@@ -119,7 +127,6 @@ async function requireAdmin() {
         return false;
     }
 
-
     const {
         data: admin,
         error
@@ -129,7 +136,6 @@ async function requireAdmin() {
         .eq("user_id", user.id)
         .maybeSingle();
 
-
     if (error) {
 
         console.error(
@@ -137,9 +143,11 @@ async function requireAdmin() {
             error
         );
 
+        window.location.href =
+            "dashboard.html";
+
         return false;
     }
-
 
     if (!admin) {
 
@@ -148,7 +156,6 @@ async function requireAdmin() {
 
         return false;
     }
-
 
     localStorage.setItem(
         "admin",

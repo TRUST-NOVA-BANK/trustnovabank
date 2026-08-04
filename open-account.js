@@ -1,39 +1,25 @@
-/* =====================================
+ /* =====================================
    TRUSTNOVA BANK
    OPEN BANK ACCOUNT
 ===================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-const SUPABASE_URL =
-    "https://uiltkhacgipmjrlgsnvb.supabase.co";
 
-const SUPABASE_ANON_KEY =
-    "sb_publishable_FUPiaEMQmlO0X7CtZlZU-Q_PjCC3mGD";
-
-const supabase =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-   
-    const form =
+    const openAccountForm =
         document.getElementById("openAccountForm");
 
-    if (!form) {
-        console.error("openAccountForm not found.");
+    if (!openAccountForm) {
         return;
     }
 
-
-    form.addEventListener("submit", async (event) => {
+    openAccountForm.addEventListener("submit", async (event) => {
 
         event.preventDefault();
-
 
         try {
 
             /* =====================================
-               1. GET CURRENT SUPABASE USER
+               1. GET AUTHENTICATED USER
             ===================================== */
 
             const {
@@ -41,22 +27,13 @@ const supabase =
                 error: authError
             } = await supabase.auth.getUser();
 
-
             if (authError || !authData.user) {
-
-                alert(
-                    "Please sign in before opening a bank account."
-                );
-
-                window.location.href =
-                    "login.html";
-
+                alert("Please sign in before opening a bank account.");
+                window.location.href = "login.html";
                 return;
             }
 
-
-            const authUser =
-                authData.user;
+            const authUser = authData.user;
 
 
             /* =====================================
@@ -68,15 +45,9 @@ const supabase =
                 error: customerError
             } = await supabase
                 .from("users")
-                .select(
-                    "user_id, first_name, last_name, email"
-                )
-                .eq(
-                    "auth_user_id",
-                    authUser.id
-                )
+                .select("user_id, first_name, last_name, email")
+                .eq("auth_user_id", authUser.id)
                 .single();
-
 
             if (customerError || !customer) {
 
@@ -86,7 +57,7 @@ const supabase =
                 );
 
                 alert(
-                    "Your customer profile could not be found."
+                    "Customer profile could not be found."
                 );
 
                 return;
@@ -102,34 +73,25 @@ const supabase =
                 error: existingError
             } = await supabase
                 .from("accounts")
-                .select(
-                    "account_id, account_number, account_type"
-                )
-                .eq(
-                    "user_id",
-                    customer.user_id
-                );
-
+                .select("account_id, account_number")
+                .eq("user_id", customer.user_id);
 
             if (existingError) {
 
                 console.error(
-                    "Existing account check failed:",
+                    "Account lookup error:",
                     existingError
                 );
 
                 alert(
-                    "Unable to check your existing accounts."
+                    "Unable to check existing accounts."
                 );
 
                 return;
             }
 
 
-            if (
-                existingAccounts &&
-                existingAccounts.length > 0
-            ) {
+            if (existingAccounts && existingAccounts.length > 0) {
 
                 alert(
                     "You already have a bank account."
@@ -144,25 +106,12 @@ const supabase =
             ===================================== */
 
             const accountTypeElement =
-                document.getElementById(
-                    "account_type"
-                );
-
+                document.getElementById("account_type");
 
             const accountType =
                 accountTypeElement
-                    ? accountTypeElement.value.trim()
-                    : "";
-
-
-            if (!accountType) {
-
-                alert(
-                    "Please select an account type."
-                );
-
-                return;
-            }
+                    ? accountTypeElement.value
+                    : "Checking";
 
 
             /* =====================================
@@ -174,19 +123,14 @@ const supabase =
 
 
             /* =====================================
-               6. CREATE ACCOUNT NAME
-            ===================================== */
+               6. CREATE BANK ACCOUNT
+               
+               IMPORTANT:
+               accounts.status is SMALLINT.
 
-            const accountName =
-                `${customer.first_name} ${customer.last_name}`;
-
-
-            /* =====================================
-               7. CREATE BANK ACCOUNT
-
-               status is intentionally omitted
-               because the database currently has
-               no documented numeric status value.
+               We are deliberately NOT supplying
+               status until your application defines
+               its numeric status values.
             ===================================== */
 
             const {
@@ -206,18 +150,21 @@ const supabase =
                         accountType,
 
                     balance:
-                        0.00,
+                        0,
 
                     currency:
                         "USD",
 
                     account_name:
-                        accountName,
+                        `${customer.first_name} ${customer.last_name}`,
 
                     opened_date:
                         new Date()
                             .toISOString()
-                            .split("T")[0]
+                            .split("T")[0],
+
+                    created_at:
+                        new Date().toISOString()
 
                 }])
                 .select()
@@ -227,12 +174,12 @@ const supabase =
             if (accountError) {
 
                 console.error(
-                    "Account creation failed:",
+                    "Account creation error:",
                     accountError
                 );
 
                 alert(
-                    "Account creation failed: " +
+                    "Bank account could not be created: " +
                     accountError.message
                 );
 
@@ -241,25 +188,22 @@ const supabase =
 
 
             /* =====================================
-               8. SUCCESS
+               7. SUCCESS
             ===================================== */
 
             console.log(
-                "Account created:",
+                "Bank account created:",
                 account
             );
 
-
             alert(
-                "Your bank account was created successfully.\n\n" +
+                "Your bank account has been created successfully.\n\n" +
                 "Account Number: " +
                 account.account_number
             );
 
-
             window.location.href =
                 "dashboard.html";
-
 
         }
 
@@ -271,9 +215,8 @@ const supabase =
             );
 
             alert(
-                "Something went wrong while opening your account."
+                "Unable to create the bank account."
             );
-
         }
 
     });
@@ -287,10 +230,23 @@ const supabase =
 
 function generateAccountNumber() {
 
-    const random =
-        Math.floor(
-            Math.random() * 9000000000
-        ) + 1000000000;
+    const min = 1000000000n;
+    const range = 9000000000n; // 10-digit numbers: [1000000000, 9999999999]
+    const maxUint64 = (1n << 64n) - 1n;
+    const limit = maxUint64 - ((maxUint64 + 1n) % range);
 
-    return String(random);
+    while (true) {
+        const bytes = new Uint8Array(8);
+        window.crypto.getRandomValues(bytes);
+
+        let value = 0n;
+        for (const byte of bytes) {
+            value = (value << 8n) | BigInt(byte);
+        }
+
+        if (value <= limit) {
+            return String(min + (value % range));
+        }
+    }
+
 }
